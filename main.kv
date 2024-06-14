@@ -1,0 +1,3742 @@
+#:import MDDropdownMenu kivymd.uix.menu.MDDropdownMenu
+#:import MDLabel kivymd.uix.label.MDLabel
+#:import MapView kivy_garden.mapview
+
+
+
+
+WindowManager:
+    LoginPage:
+    ForgotPage:
+    SignupPage:
+    HomePage:
+    ServicePage:
+    JournalPage:
+    ContactPage:
+    AccountPage:
+    AccountDetailPage:
+    ChangePasswordPage:
+    DeleteAccountPage:
+    OtpVerifyPage:
+    ForgotChangePage:
+
+<LoginPage>:
+    name :"first"
+    Screen:
+        BoxLayout:
+            orientation: 'vertical'
+            padding: dp(10)
+            size_hint_y: None
+            height: dp(640)
+
+            canvas.before:
+                Color:
+                    rgba: 243/255, 240/255, 229/255, 1  # Background color #F3F0E5
+                Rectangle:
+                    size: self.size
+                    pos: self.pos
+
+
+            Image:
+                source: "bytecodelogo2.png"
+                size_hint: None, None
+                width: "200dp"
+                height: "200dp"
+                pos_hint: {'center_x': 0.5, 'center_y': 0.84}
+
+
+            BoxLayout:
+                orientation: 'vertical'
+                size_hint_y: None
+                height: dp(340)
+
+
+                canvas.before:
+                    Color:
+                        rgba: 1, 1, 1, 1  # White background
+                    RoundedRectangle:
+                        size: self.width - dp(25), self.height  # Adjust the width
+                        pos: self.x + dp(16), self.y  # Center horizontally
+                        radius: [43]
+
+                padding: dp(16)
+                spacing: dp(16)
+
+                MDTextField:
+                    id:email
+                    hint_text:"Email"
+                    icon_right:'email'
+                    font_size:"20dp"
+                    font_name: "Aceh-Regular.otf"
+                    size_hint_x:.88
+                    theme_bg_color: "Custom"
+                    fill_color_normal:rgba(243/255, 240/255, 229/255, 1)
+                    fill_color_focus: 0.6, 0.6, 0.6, 1
+                    hint_text_color_normal: 0.6, 0.6, 0.6, 1
+                    hint_text_color_focus: 0, 0, 0, 1
+                    text_color_normal: 0.6, 0.6, 0.6, 1 # Set the text color to full black
+                    text_color_focus: 0, 0, 0, 1
+                    line_color_normal: 0.5, 0.5, 0.5, 1  # Set the line color to full black
+                    line_color_focus: 0, 0, 0, 1
+
+                    icon_right_color_normal: 0.6, 0.6, 0.6, 1
+                    icon_right_color_focus: 0, 0, 0, 1
+                    pos_hint:{'center_x':.5,'center_y':.63}
+                    on_text:self.text = self.text.replace(" ", "")
+                    write_tab:False
+                MDTextField:
+                    id:psswrd
+                    hint_text:"Password"
+                    password:True
+                    icon_right:'eye-off'
+                    font_name: "Aceh-Regular.otf"
+                    font_size:"20dp"
+                    size_hint_x:.88
+                    theme_bg_color: "Custom"
+                    fill_color_normal:rgba(243/255, 240/255, 229/255, 1)
+                    fill_color_focus: 0.6, 0.6, 0.6, 1
+                    hint_text_color_normal: 0.6, 0.6, 0.6, 1
+                    hint_text_color_focus: 0, 0, 0, 1
+                    text_color_normal: 0.6, 0.6, 0.6, 1 # Set the text color to full black
+                    text_color_focus: 0, 0, 0, 1
+                    line_color_normal: 0.5, 0.5, 0.5, 1  # Set the line color to full black
+                    line_color_focus: 0, 0, 0, 1
+
+                    icon_right_color_normal: 0.6, 0.6, 0.6, 1
+                    icon_right_color_focus: 0, 0, 0, 1
+                    pos_hint:{'center_x':.5,'center_y':.5}
+                    on_text:self.text = self.text.replace(" ", "")
+
+                BoxLayout:
+                    size_hint: .85, None
+                    height: "30dp"
+                    pos_hint: {'center_x': .5, 'center_y': .41}
+                    spacing: "5dp"
+
+                    MDCheckbox:
+                        id: cb
+                        size_hint: None, None
+                        width: "30dp"
+                        height: "30dp"
+                        pos_hint: {'center_x': .5, 'center_y': .51}
+                        theme_text_color: 'Custom'
+                        color_inactive: 0.6, 0.6, 0.6, 1
+                        on_press:
+                            psswrd.password = not psswrd.password
+                            psswrd.icon_right = "eye" if psswrd.icon_right == "eye-off" else "eye-off"
+
+                    MDLabel:
+                        text: "[ref=Show Password]Show Password[/ref]"
+                        markup: True
+                        font_name: "Fontspring-DEMO-sonnygothic-regular.otf"
+                        pos_hint: {'center_x': .5, 'center_y': .51}
+                        theme_text_color: "Custom"
+                        text_color: 0.6, 0.6, 0.6, 1   # Set the text color to black
+                        on_ref_press:
+                            cb.active = not cb.active
+                            psswrd.icon_right = "eye" if psswrd.icon_right == "eye-off" else "eye-off"
+
+                BoxLayout:
+                    size_hint:None,None
+                    height:"30dp"
+                    pos_hint:{'center_x':0.46,'center_y':.32}
+                    spacing: "5dp"
+                    MDFlatButton:
+                        text: "SIGN IN"
+                        font_style: "Button"
+                        font_size: "24dp"
+                        md_bg_color: 0.6, 0.6, 0.6, 1
+                        theme_text_color: "Custom"
+                        font_name: "Fontspring-DEMO-sonnygothic-regular.otf"
+                        text_color: 1, 1, 1, 1
+                        pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+                        on_release:
+                            root.on_sign_in(email.text, psswrd.text)
+                BoxLayout:
+                    size_hint:None, None
+                    height:"30dp"
+                    pos_hint:{'center_x':0.49,'center_y':.26}
+                    spacing: "5dp"
+                    MDTextButton:
+                        text:"Forgot Password?"
+                        font_style: "Caption"
+                        font_name: "Aceh-Regular.otf"
+                        theme_text_color: "Custom"
+                        text_color: 0.6, 0.6, 0.6, 1
+                        font_size: "12.5dp"
+                        on_release: root.sendotp()
+                        pos_hint: {'center_x': 0.5, 'center_y': 0.45}
+            Widget:
+                size_hint_y: None
+                height: dp(9)  # Adjust the space between the button and the label
+            BoxLayout:
+                orientation: 'vertical'
+                size_hint: None, None
+                height: "30dp"  # Adjust the height as needed
+                pos_hint: {'center_x': 0.51, 'center_y': 0.1}
+                spacing: "5dp"
+
+                MDTextButton:
+                    text: "SIGNUP"
+                    font_style: "Button"
+                    font_size:"16dp"
+                    font_name: "Fontspring-DEMO-sonnygothic-regular.otf"
+                    theme_text_color: "Custom"
+                    text_color: 0.6, 0.6, 0.6, 1
+                    on_release: app.root.current = 'second'
+            Widget:
+                size_hint_y: None
+                height: dp(9)  # Adjust the space between the button and the label
+
+            BoxLayout:
+                size_hint_y: None
+                orientation: 'horizontal'
+                height: dp(50)
+
+                spacing: dp(25)
+                pos_hint: {'center_x': 0.8, 'center_y': 0.1}
+
+                MDIconButton:
+                    icon: "instagram"
+                    theme_text_color: "Custom"
+                    icon_color: 0.6, 0.6, 0.6, 1
+                    size_hint: None, None
+                    size: dp(0.1), dp(0.1)
+                    on_release: app.open_url5()  # Update the on_release function as needed
+
+                MDIconButton:
+                    icon: "whatsapp"
+                    theme_text_color: "Custom"
+                    icon_color: 0.6, 0.6, 0.6, 1
+                    size_hint: None, None
+                    size: dp(0.1), dp(0.1)
+                    on_release: app.open_url4()  # Update the on_release function as needed
+
+
+
+
+
+
+<ForgotPage>:
+    name :"forgot"
+    Screen:
+        BoxLayout:
+            orientation: 'vertical'
+            padding: dp(10)
+            size_hint_y: None
+            height: dp(640)
+
+            canvas.before:
+                Color:
+                    rgba: 243/255, 240/255, 229/255, 1  # Background color #F3F0E5
+                Rectangle:
+                    size: self.size
+                    pos: self.pos
+
+            Image:
+                source: "bytecodelogo2.png"
+                size_hint: None, None
+                width: "200dp"
+                height: "200dp"
+                pos_hint: {'center_x': 0.5, 'center_y': 0.84}
+            Widget:
+                size_hint_y: None
+                height: dp(55)  # Adjust the space between the button and the label
+            BoxLayout:
+                orientation: 'vertical'
+                size_hint_y: None
+                height: dp(200)
+
+
+                canvas.before:
+                    Color:
+                        rgba: 1, 1, 1, 1  # White background
+                    RoundedRectangle:
+                        size: self.width - dp(34), self.height  # Adjust the width
+                        pos: self.x + dp(16), self.y  # Center horizontally
+                        radius: [43]
+
+                padding: dp(16)
+                spacing: dp(16)
+                MDTextField:
+                    id:email
+                    hint_text:" Enter Your email"
+                    icon_right:'email'
+                    font_size:"20dp"
+                    font_name: "Aceh-Regular.otf"
+                    size_hint_x:.88
+                    theme_bg_color: "Custom"
+                    fill_color_normal:rgba(243/255, 240/255, 229/255, 1)
+                    fill_color_focus: 0.6, 0.6, 0.6, 1
+                    hint_text_color_normal: 0.6, 0.6, 0.6, 1
+                    hint_text_color_focus: 0, 0, 0, 1
+                    text_color_normal: 0.6, 0.6, 0.6, 1 # Set the text color to full black
+                    text_color_focus: 0, 0, 0, 1
+                    line_color_normal: 0.5, 0.5, 0.5, 1  # Set the line color to full black
+                    line_color_focus: 0, 0, 0, 1
+                    icon_right_color_normal: 0.6, 0.6, 0.6, 1
+                    icon_right_color_focus: 0, 0, 0, 1
+                    pos_hint:{'center_x':.5,'center_y':.57}
+                    on_text:self.text = self.text.replace(" ", "")
+                    write_tab:False
+
+                Widget:
+                    size_hint_y: None
+                    height: dp(5)  # Adjust the space between the button and the label
+
+                BoxLayout:
+                    size_hint:None,None
+                    height:"30dp"
+                    pos_hint:{'center_x':0.22,'center_y':.45}
+                    spacing: "5dp"
+                    MDFlatButton:
+                        text: "RESET PASSWORD"
+                        font_style: "Button"
+                        font_size: "24dp"
+                        font_name: "Fontspring-DEMO-sonnygothic-regular.otf"
+                        md_bg_color: 0.6, 0.6, 0.6, 1
+                        theme_text_color: "Custom"
+                        text_color: 1, 1, 1, 1
+                        pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+                        on_release:
+                            root.send_otp(email.text)
+                Widget:
+                    size_hint_y: None
+                    height: dp(7)  # Adjust the space between the button and the label
+            Widget:
+                size_hint_y: None
+                height: dp(52)  # Adjust the space between the button and the label
+
+            BoxLayout:
+                size_hint: None, None
+                height: "30dp"
+                pos_hint: {'center_x': 0.51, 'center_y': 0.1}
+                spacing: "5dp"
+                MDTextButton:
+                    text: "LOGIN"
+                    theme_text_color: "Custom"
+                    text_color: 0.6, 0.6, 0.6, 1
+                    font_style: "Button"
+                    font_name: "Fontspring-DEMO-sonnygothic-regular.otf"
+                    font_size:"16dp"
+                    on_release: app.root.current = 'first'
+            Widget:
+                size_hint_y: None
+                height: dp(40)  # Adjust the space between the button and the label
+
+            BoxLayout:
+                size_hint_y: None
+                orientation: 'horizontal'
+                height: dp(50)
+
+                spacing: dp(25)
+                pos_hint: {'center_x': 0.8, 'center_y': 0.1}
+
+                MDIconButton:
+                    icon: "instagram"
+                    theme_text_color: "Custom"
+                    icon_color: 0.6, 0.6, 0.6, 1
+                    size_hint: None, None
+                    size: dp(0.1), dp(0.1)
+                    on_release: app.open_url5()  # Update the on_release function as needed
+
+                MDIconButton:
+                    icon: "whatsapp"
+                    theme_text_color: "Custom"
+                    icon_color: 0.6, 0.6, 0.6, 1
+                    size_hint: None, None
+                    size: dp(0.1), dp(0.1)
+                    on_release: app.open_url4()  # Update the on_release function as needed
+            Widget:
+                size_hint_y: None
+                height: dp(10)  # Adjust the space between the button and the label
+
+<OtpVerifyPage>:
+    name :"otp"
+    Screen:
+        BoxLayout:
+            orientation: 'vertical'
+            padding: dp(10)
+            size_hint_y: None
+            height: dp(640)
+
+            canvas.before:
+                Color:
+                    rgba: 243/255, 240/255, 229/255, 1  # Background color #F3F0E5
+                Rectangle:
+                    size: self.size
+                    pos: self.pos
+
+            Image:
+                source: "bytecodelogo2.png"
+                size_hint: None, None
+                width: "200dp"
+                height: "200dp"
+                pos_hint: {'center_x': 0.5, 'center_y': 0.84}
+            Widget:
+                size_hint_y: None
+                height: dp(55)  # Adjust the space between the button and the label
+            BoxLayout:
+                orientation: 'vertical'
+                size_hint_y: None
+                height: dp(200)
+
+
+                canvas.before:
+                    Color:
+                        rgba: 1, 1, 1, 1  # White background
+                    RoundedRectangle:
+                        size: self.width - dp(34), self.height  # Adjust the width
+                        pos: self.x + dp(16), self.y  # Center horizontally
+                        radius: [43]
+
+                padding: dp(16)
+                spacing: dp(16)
+
+                MDTextField:
+                    id:otp
+                    hint_text:" Enter OTP"
+                    icon_right:'mdiLockCheck'
+                    font_size:"20dp"
+                    font_name: "Aceh-Regular.otf"
+                    size_hint_x:.88
+                    theme_bg_color: "Custom"
+                    fill_color_normal:rgba(243/255, 240/255, 229/255, 1)
+                    fill_color_focus: 0.6, 0.6, 0.6, 1
+                    hint_text_color_normal: 0.6, 0.6, 0.6, 1
+                    hint_text_color_focus: 0, 0, 0, 1
+                    text_color_normal: 0.6, 0.6, 0.6, 1 # Set the text color to full black
+                    text_color_focus: 0, 0, 0, 1
+                    line_color_normal: 0.5, 0.5, 0.5, 1  # Set the line color to full black
+                    line_color_focus: 0, 0, 0, 1
+                    icon_right_color_normal: 0.6, 0.6, 0.6, 1
+                    icon_right_color_focus: 0, 0, 0, 1
+                    pos_hint:{'center_x':.5,'center_y':.57}
+                    on_text:self.text = self.text.replace(" ", "")
+                    write_tab:False
+
+
+                BoxLayout:
+                    size_hint:None,None
+                    height:"30dp"
+                    pos_hint:{'center_x':0.35,'center_y':.45}
+                    spacing: "5dp"
+                    MDFlatButton:
+                        text: "VERIFY OTP"
+                        font_style: "Button"
+                        font_name: "Fontspring-DEMO-sonnygothic-regular.otf"
+                        font_size: "24dp"
+                        md_bg_color: 0.6, 0.6, 0.6, 1
+                        theme_text_color: "Custom"
+                        text_color: 1, 1, 1, 1
+                        pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+                        on_release:
+                            root.verify_otp(otp.text)
+
+                BoxLayout:
+                    size_hint: None, None
+                    id: box_layout
+                    height: "30dp"
+                    pos_hint: {'center_x': 0.46, 'center_y': .4}
+                    spacing: "5dp"
+                    MDTextButton:
+                        id: resend_otp_button
+                        text: "Resend OTP"
+                        font_name: "Aceh-Regular.otf"
+                        font_style: "Caption"
+                        theme_text_color: "Custom"
+                        text_color: 0.6, 0.6, 0.6, 1
+                        font_size: "12.5dp"
+                        on_release: root.resend_otp()
+                        pos_hint: {'center_x': 0.5, 'center_y': 0.45}
+                        disabled: True
+
+            Widget:
+                size_hint_y: None
+                height: dp(52)  # Adjust the space between the button and the label
+
+
+            BoxLayout:
+                size_hint: None, None
+                height: "30dp"
+                pos_hint: {'center_x': 0.52, 'center_y': 0.1}
+                spacing: "5dp"
+                MDTextButton:
+                    text: "LOGIN"
+                    font_name: "Fontspring-DEMO-sonnygothic-regular.otf"
+                    theme_text_color: "Custom"
+                    text_color: 0.6, 0.6, 0.6, 1
+                    font_style: "Button"
+                    font_size:"16dp"
+                    on_release: app.root.current = 'first'
+
+            Widget:
+                size_hint_y: None
+                height: dp(40)  # Adjust the space between the button and the label
+            BoxLayout:
+                size_hint_y: None
+                orientation: 'horizontal'
+                height: dp(50)
+
+                spacing: dp(25)
+                pos_hint: {'center_x': 0.8, 'center_y': 0.1}
+
+                MDIconButton:
+                    icon: "instagram"
+                    theme_text_color: "Custom"
+                    icon_color: 0.6, 0.6, 0.6, 1
+                    size_hint: None, None
+                    size: dp(0.1), dp(0.1)
+                    on_release: app.open_url5()  # Update the on_release function as needed
+
+                MDIconButton:
+                    icon: "whatsapp"
+                    theme_text_color: "Custom"
+                    icon_color: 0.6, 0.6, 0.6, 1
+                    size_hint: None, None
+                    size: dp(0.1), dp(0.1)
+                    on_release: app.open_url4()  # Update the on_release function as needed
+
+            Widget:
+                size_hint_y: None
+                height: dp(10)  # Adjust the space between the button and the label
+
+<ForgotChangePage>:
+    name :"forgot_change"
+    Screen:
+        BoxLayout:
+            orientation: 'vertical'
+            padding: dp(10)
+            size_hint_y: None
+            height: dp(640)
+
+            canvas.before:
+                Color:
+                    rgba: 243/255, 240/255, 229/255, 1  # Background color #F3F0E5
+                Rectangle:
+                    size: self.size
+                    pos: self.pos
+            Image:
+                source: "bytecodelogo2.png"
+                size_hint: None, None
+                width: "200dp"
+                height: "200dp"
+                pos_hint: {'center_x': 0.5, 'center_y': 0.84}
+
+            BoxLayout:
+                orientation: 'vertical'
+                size_hint_y: None
+                height: dp(340)
+
+
+                canvas.before:
+                    Color:
+                        rgba: 1, 1, 1, 1  # White background
+                    RoundedRectangle:
+                        size: self.width - dp(34), self.height  # Adjust the width
+                        pos: self.x + dp(16), self.y  # Center horizontally
+                        radius: [43]
+
+                padding: dp(16)
+                spacing: dp(16)
+
+
+                MDTextField:
+                    id:newpassword
+                    hint_text:"New Password"
+                    icon_right:'eye-off'
+                    font_size:"20dp"
+                    password:True
+                    font_name: "Aceh-Regular.otf"
+                    size_hint_x:.88
+                    theme_bg_color: "Custom"
+                    fill_color_normal:rgba(243/255, 240/255, 229/255, 1)
+                    fill_color_focus: 0.6, 0.6, 0.6, 1
+                    hint_text_color_normal: 0.6, 0.6, 0.6, 1
+                    hint_text_color_focus: 0, 0, 0, 1
+                    text_color_normal: 0.6, 0.6, 0.6, 1 # Set the text color to full black
+                    text_color_focus: 0, 0, 0, 1
+                    line_color_normal: 0.5, 0.5, 0.5, 1  # Set the line color to full black
+                    line_color_focus: 0, 0, 0, 1
+                    icon_right_color_normal: 0.6, 0.6, 0.6, 1
+                    icon_right_color_focus: 0, 0, 0, 1
+                    pos_hint:{'center_x':.5,'center_y':.63}
+                    on_text:self.text = self.text.replace(" ", "")
+                    write_tab:False
+                MDTextField:
+                    id:confirmpassword
+                    hint_text:"Confirm Password"
+                    password:True
+                    icon_right:'eye-off'
+                    font_name: "Aceh-Regular.otf"
+                    font_size:"20dp"
+                    size_hint_x:.88
+                    theme_bg_color: "Custom"
+                    fill_color_normal:rgba(243/255, 240/255, 229/255, 1)
+                    fill_color_focus: 0.6, 0.6, 0.6, 1
+                    hint_text_color_normal: 0.6, 0.6, 0.6, 1
+                    hint_text_color_focus: 0, 0, 0, 1
+                    text_color_normal: 0.6, 0.6, 0.6, 1 # Set the text color to full black
+                    text_color_focus: 0, 0, 0, 1
+                    line_color_normal: 0.5, 0.5, 0.5, 1  # Set the line color to full black
+                    line_color_focus: 0, 0, 0, 1
+                    icon_right_color_normal: 0.6, 0.6, 0.6, 1
+                    icon_right_color_focus: 0, 0, 0, 1
+                    pos_hint:{'center_x':.5,'center_y':.5}
+                    on_text:self.text = self.text.replace(" ", "")
+                BoxLayout:
+                    size_hint: .85, None
+                    height: "30dp"
+                    pos_hint: {'center_x': .5, 'center_y': .41}
+                    spacing: "5dp"
+                    MDCheckbox:
+                        id: cb
+                        size_hint: None, None
+                        width: "30dp"
+                        height: "30dp"
+                        theme_text_color: 'Custom'
+                        color_inactive: 0.6, 0.6, 0.6, 1
+                        pos_hint: {'center_x': .5, 'center_y': .51}
+                        on_active:
+                            newpassword.password = not cb.active
+                            newpassword.icon_right = "eye" if cb.active else "eye-off"
+                            confirmpassword.password = not cb.active
+                            confirmpassword.icon_right = "eye" if cb.active else "eye-off"
+                    MDLabel:
+                        text: "[ref=Show Password]Show Password[/ref]"
+                        markup: True
+                        theme_text_color: "Custom"
+                        text_color: 0.6, 0.6, 0.6, 1
+                        font_name: "Fontspring-DEMO-sonnygothic-regular.otf"
+                        pos_hint: {'center_x': .5, 'center_y': .51}
+                        on_ref_press:
+                            cb.active = not cb.active
+                Widget:
+                    size_hint_y: None
+                    height: dp(5)  # Adjust the space between the button and the label
+                BoxLayout:
+                    size_hint:None,None
+                    height:"30dp"
+                    pos_hint:{'center_x':0.165,'center_y':.32}
+                    spacing: "5dp"
+                    MDFlatButton:
+                        text: "Change Password"
+                        font_style: "Button"
+                        font_size: "24dp"
+                        font_name: "Fontspring-DEMO-sonnygothic-regular.otf"
+                        md_bg_color: 0.6, 0.6, 0.6, 1
+                        theme_text_color: "Custom"
+                        text_color: 1, 1, 1, 1
+                        pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+                        on_release:
+                            root.change_password()
+                Widget:
+                    size_hint_y: None
+                    height: dp(27)  # Adjust the space between the button and the label
+            Widget:
+                size_hint_y: None
+                height: dp(25)  # Adjust the space between the button and the label
+
+            BoxLayout:
+                size_hint_y: None
+                orientation: 'horizontal'
+                height: dp(50)
+
+                spacing: dp(25)
+                pos_hint: {'center_x': 0.8, 'center_y': 0.1}
+
+                MDIconButton:
+                    icon: "instagram"
+                    theme_text_color: "Custom"
+                    icon_color: 0.6, 0.6, 0.6, 1
+                    size_hint: None, None
+                    size: dp(0.1), dp(0.1)
+                    on_release: app.open_url5()  # Update the on_release function as needed
+
+                MDIconButton:
+                    icon: "whatsapp"
+                    theme_text_color: "Custom"
+                    icon_color: 0.6, 0.6, 0.6, 1
+                    size_hint: None, None
+                    size: dp(0.1), dp(0.1)
+                    on_release: app.open_url4()  # Update the on_release function as needed
+
+            Widget:
+                size_hint_y: None
+                height: dp(25)  # Adjust the space between the button and the label
+
+
+
+<SignupPage>:
+    name: "second"
+    Screen:
+        BoxLayout:
+            orientation: 'vertical'
+            padding: dp(10)
+            size_hint_y: None
+            height: dp(640)
+
+            canvas.before:
+                Color:
+                    rgba: 243/255, 240/255, 229/255, 1  # Background color #F3F0E5
+                Rectangle:
+                    size: self.size
+                    pos: self.pos
+
+            Image:
+                source: "bytecodelogo2.png"
+                size_hint: None, None
+                width: "200dp"
+                height: "200dp"
+                pos_hint: {'center_x': 0.5, 'center_y': 0.2}
+
+            BoxLayout:
+                orientation: 'vertical'
+                size_hint_y: None
+                height: dp(352)
+
+
+                canvas.before:
+                    Color:
+                        rgba: 1, 1, 1, 1  # White background
+                    RoundedRectangle:
+                        size: self.width - dp(34), self.height  # Adjust the width
+                        pos: self.x + dp(16), self.y + dp(12)  # Center horizontally
+                        radius: [43]
+
+                padding: dp(16)
+
+
+                MDTextField:
+                    id: username
+                    hint_text: "Username"
+                    icon_right: 'account'
+                    font_size: "20dp"
+                    font_name: "Aceh-Regular.otf"
+                    size_hint_x: .88
+                    theme_bg_color: "Custom"
+                    fill_color_normal:rgba(243/255, 240/255, 229/255, 1)
+                    fill_color_focus: 0.6, 0.6, 0.6, 1
+                    hint_text_color_normal: 0.6, 0.6, 0.6, 1
+                    hint_text_color_focus: 0, 0, 0, 1
+                    text_color_normal: 0.6, 0.6, 0.6, 1 # Set the text color to full black
+                    text_color_focus: 0, 0, 0, 1
+                    line_color_normal: 0.5, 0.5, 0.5, 1  # Set the line color to full black
+                    line_color_focus: 0, 0, 0, 1
+                    icon_right_color_normal: 0.6, 0.6, 0.6, 1
+                    icon_right_color_focus: 0, 0, 0, 1
+                    pos_hint: {'center_x': .5, 'center_y': .7}
+                    on_text: self.text = self.text.replace(" ", "")
+                    write_tab: False
+
+                MDTextField:
+                    id: mobilenumber
+                    hint_text: "Mobile Number"
+                    input_filter: root.custom_input_filter
+                    icon_right: 'phone'
+                    helper_text: "Include country code"
+                    helper_text_mode: "on_focus"
+                    font_size: "20dp"
+                    font_name: "Aceh-Regular.otf"
+                    size_hint_x: .88
+                    theme_bg_color: "Custom"
+                    fill_color_normal:rgba(243/255, 240/255, 229/255, 1)
+                    fill_color_focus: 0.6, 0.6, 0.6, 1
+                    hint_text_color_normal: 0.6, 0.6, 0.6, 1
+                    hint_text_color_focus: 0, 0, 0, 1
+                    text_color_normal: 0.6, 0.6, 0.6, 1 # Set the text color to full black
+                    text_color_focus: 0, 0, 0, 1
+                    line_color_normal: 0.5, 0.5, 0.5, 1  # Set the line color to full black
+                    line_color_focus: 0, 0, 0, 1
+                    icon_right_color_normal: 0.6, 0.6, 0.6, 1
+                    icon_right_color_focus: 0, 0, 0, 1
+                    pos_hint: {'center_x': .5, 'center_y': .6}
+                    on_text: self.text = self.text.replace(" ", "")
+                    on_focus: if self.focus: root.menu.open()
+
+                MDTextField:
+                    id: email
+                    hint_text: "Email"
+                    icon_right: 'email'
+                    font_size: "20dp"
+                    font_name: "Aceh-Regular.otf"
+                    size_hint_x: .88
+                    theme_bg_color: "Custom"
+                    fill_color_normal:rgba(243/255, 240/255, 229/255, 1)
+                    fill_color_focus: 0.6, 0.6, 0.6, 1
+                    hint_text_color_normal: 0.6, 0.6, 0.6, 1
+                    hint_text_color_focus: 0, 0, 0, 1
+                    text_color_normal: 0.6, 0.6, 0.6, 1 # Set the text color to full black
+                    text_color_focus: 0, 0, 0, 1
+                    line_color_normal: 0.5, 0.5, 0.5, 1  # Set the line color to full black
+                    line_color_focus: 0, 0, 0, 1
+                    icon_right_color_normal: 0.6, 0.6, 0.6, 1
+                    icon_right_color_focus: 0, 0, 0, 1
+                    pos_hint: {'center_x': .5, 'center_y': .5}
+                    on_text: self.text = self.text.replace(" ", "")
+                    write_tab: False
+
+                MDTextField:
+                    id: psswrd
+                    hint_text: "Password"
+                    password: True
+                    icon_right: 'eye-off'
+                    font_size: "20dp"
+                    font_name: "Aceh-Regular.otf"
+                    size_hint_x: .88
+                    theme_bg_color: "Custom"
+                    fill_color_normal:rgba(243/255, 240/255, 229/255, 1)
+                    fill_color_focus: 0.6, 0.6, 0.6, 1
+                    hint_text_color_normal: 0.6, 0.6, 0.6, 1
+                    hint_text_color_focus: 0, 0, 0, 1
+                    text_color_normal: 0.6, 0.6, 0.6, 1 # Set the text color to full black
+                    text_color_focus: 0, 0, 0, 1
+                    line_color_normal: 0.5, 0.5, 0.5, 1  # Set the line color to full black
+                    line_color_focus: 0, 0, 0, 1
+                    icon_right_color_normal: 0.6, 0.6, 0.6, 1
+                    icon_right_color_focus: 0, 0, 0, 1
+                    pos_hint: {'center_x': .5, 'center_y': .41}
+                    on_text: self.text = self.text.replace(" ", "")
+
+                BoxLayout:
+                    size_hint: .85, None
+                    height: "30dp"
+                    pos_hint: {'center_x': .5, 'center_y': .35}
+                    spacing: "5dp"
+                    MDCheckbox:
+                        id: cb
+                        size_hint: None, None
+                        width: "30dp"
+                        color_inactive: 0.6, 0.6, 0.6, 1
+                        height: "30dp"
+                        pos_hint: {'center_x': .5, 'center_y': .73}
+                        on_press:
+                            psswrd.password = False if psswrd.password else True
+                            psswrd.icon_right = "eye" if psswrd.icon_right == "eye-off" else "eye-off"
+                    MDLabel:
+                        text: "[ref=Show Password]Show Password[/ref]"
+                        markup: True
+                        theme_text_color: "Custom"
+                        text_color: 0.6, 0.6, 0.6, 1
+                        font_name: "Fontspring-DEMO-sonnygothic-regular.otf"
+                        pos_hint: {'center_x': .5, 'center_y': .73}
+                        on_ref_press:
+                            cb.active = False if cb.active else True
+                            psswrd.icon_right = "eye" if psswrd.icon_right == "eye-off" else "eye-off"
+
+                Widget:
+                    size_hint_y: None
+                    height: dp(7)  # Adjust the space between the button and the label
+                BoxLayout:
+                    size_hint: None, None
+                    height: "30dp"
+                    pos_hint: {'center_x': 0.44, 'center_y': .28}
+                    spacing: "5dp"
+                    MDFlatButton:
+                        text: "SIGN UP"
+                        font_style: "Button"
+                        font_size: "24dp"
+                        font_name: "Fontspring-DEMO-sonnygothic-regular.otf"
+                        md_bg_color: 0.6, 0.6, 0.6, 1
+                        theme_text_color: "Custom"
+                        text_color: 1, 1, 1, 1
+                        on_release: root.receive_data(username, mobilenumber, email, psswrd)
+                        pos_hint: {'center_x': 0.5, 'center_y': 0.45}
+
+                Widget:
+                    size_hint_y: None
+                    height: dp(16)  # Adjust the space between the button and the label
+
+
+            BoxLayout:
+                size_hint: None, None
+                height: "30dp"
+                pos_hint: {'center_x': 0.52, 'center_y': 0.1}
+                spacing: "5dp"
+                MDTextButton:
+                    text: "LOGIN"
+                    theme_text_color: "Custom"
+                    text_color: 0.6, 0.6, 0.6, 1
+                    font_style: "Button"
+                    font_name: "Fontspring-DEMO-sonnygothic-regular.otf"
+                    font_size: "16dp"
+                    on_release: app.root.current = 'first'
+
+            Widget:
+                size_hint_y: None
+                height: dp(27)  # Adjust the space between the button and the label
+
+            BoxLayout:
+                size_hint_y: None
+                orientation: 'horizontal'
+                height: dp(30)
+                spacing: dp(25)
+                pos_hint: {'center_x': 0.8, 'center_y': 0.1}
+
+                MDIconButton:
+                    icon: "instagram"
+                    theme_text_color: "Custom"
+                    icon_color: 0.6, 0.6, 0.6, 1
+                    size_hint: None, None
+                    size: dp(0.1), dp(0.1)
+                    on_release: app.open_url5()  # Update the on_release function as needed
+
+                MDIconButton:
+                    icon: "whatsapp"
+                    theme_text_color: "Custom"
+                    icon_color: 0.6, 0.6, 0.6, 1
+                    size_hint: None, None
+                    size: dp(0.1), dp(0.1)
+                    on_release: app.open_url4()  # Update the on_release function as needed
+
+
+
+<HomePage>:
+    name: "home"
+    Screen:
+        BoxLayout:
+            orientation: 'vertical'
+
+            MDTopAppBar:
+                title: "BYTECODE CRAFTERS"
+                elevation: 1
+                left_action_items: [['menu', root.dropmenu]]
+                right_action_items: [['account', root.drpmenu]]
+            ScrollView:
+                pos_hint: {'center_x': 0.5}  # Center the ScrollView horizontally
+                MDGridLayout:
+                    cols: 1
+                    adaptive_height: True
+                    spacing: 0  # Remove spacing between layouts
+                    padding: dp(0), dp(0), dp(0), dp(0)  # Set padding to 0 on all sides
+
+
+                    Image:
+                        source: 'bytecodecraftersimage1.jpg'  # Replace with the path to your above image
+                        size_hint: None, None
+                        size: dp(422), dp(450)  # Adjust the size as needed
+                        keep_ratio: True
+                        allow_stretch: False
+                        pos_hint: {'center_x': 0.5, 'center_y':1}
+                        MDLabel:
+                            text: 'About Us'
+                            theme_text_color: "Custom"
+                            text_color: 0, 0, 0
+                            font_style: "H5"
+                            size_hint_y: None
+                            height: self.texture_size[1]
+                    BoxLayout:
+                        canvas.before:
+                            Color:
+                                rgba: 1, 1, 1, 0.5  # Set the color (white in this example)
+                            Rectangle:
+                                source:"background3.jpg"
+                                size: self.size  # Set the size to match the BoxLayout size
+                                pos: self.pos
+                        size_hint_y: None
+                        orientation: 'vertical'
+                        height: dp(360)
+                        padding: dp(16)
+                        spacing: dp(37)  # Add spacing between layouts
+
+                        MDLabel:
+                            text: 'Thrive Together: The\nDigital Platform\nFueling Your Journey\nto Success'
+                            theme_text_color: "Custom"
+                            text_color: 1, 1, 1
+                            font_style: "H5"
+                            size_hint_y: None
+                            height: self.texture_size[1]
+                            font_name: "Caudex-Regular.ttf"
+
+                        MDLabel:
+                            text: "\"Empowering academic excellence through\ncutting-edge technology. Join us on a journey\nwhere trust, collaboration, commitment,\ninnovation, and integrity converge to shape the\nfuture of education. Unleash the potential of\ntomorrow's leaders with our forward-thinking\nsolutions and unwavering dedication.\""
+                            theme_text_color: "Custom"
+                            text_color: 1, 1, 1
+                            size_hint_y: None
+                            height: self.texture_size[1]
+                            font_name: "Caudex-Italic.ttf"
+                            font_size: "15.5sp"
+
+                    BoxLayout:
+                        canvas.before:
+                            Color:
+                                rgba: 243/255, 240/255, 229/255, 1  # Set the color (gray in this example)
+                            Rectangle:
+                                size: self.size  # Set the size to match the BoxLayout size
+                                pos: self.pos
+                        size_hint_y: None
+                        orientation: 'vertical'
+                        height: dp(1654)
+                        padding: dp(16)
+                        spacing: dp(16)  # Remove spacing between layouts
+
+                        MDLabel:
+                            text: 'Our Guiding Principles'
+                            theme_text_color: "Custom"
+                            text_color: 0, 0, 0
+                            font_style: "H5"
+                            size_hint_y: None
+                            height: self.texture_size[1]
+                            font_name:"DMSerifDisplay-Regular.ttf"
+
+                        MDLabel:
+                            text: 'Our mission'
+                            theme_text_color: "Custom"
+                            text_color: 0, 0, 0
+                            size_hint_y: None
+                            height: self.texture_size[1]
+                            font_name:"DMSerifDisplay-Regular.ttf"
+
+
+
+                        MDLabel:
+                            text: "We are dedicated to helping our clients utilize the concepts of academic oriented services in information technology, computational sciences, engineering, methodology, and research based activities to attain high quality knowledge and competitive position. We create and implement cutting-edge technology solutions to meet the demands and objectives of our academic clients."
+                            theme_text_color: "Custom"
+                            text_color: 0, 0, 0
+                            size_hint_y: None
+                            height: self.texture_size[1]
+                            font_name: "Caudex-Regular.ttf"
+                            font_size: "15.5sp"
+                            size_hint_x: None  # Disable relative width sizing
+                            width: dp(340)  # Set the fixed width of the label in density-independent pixels
+
+                        MDLabel:
+                            text: 'Our vision'
+                            theme_text_color: "Custom"
+                            text_color: 0, 0, 0
+                            size_hint_y: None
+                            height: self.texture_size[1]
+                            font_name:"DMSerifDisplay-Regular.ttf"
+                        MDLabel:
+                            text: "Our goal is to establish and solidify our position as a top national provider of academic oriented implementations and services. We employ cutting-edge technology with global projection, standards, and processes to create dependable, scalable, and cost-effective services that raise both our own and our academic customers’ competitiveness."
+                            theme_text_color: "Custom"
+                            text_color: 0, 0, 0
+                            size_hint_y: None
+                            height: self.texture_size[1]
+                            font_name:"Caudex-Regular.ttf"
+                            font_size: "15.5sp"
+                            size_hint_x: None  # Disable relative width sizing
+                            width: dp(320)  # Set the fixed width of the label in density-independent pixels
+                        MDLabel:
+                            text: "\u2022 To construct the highest dependable and cost-containment requirements.\n\u2022 To provide clients with smooth service and increase their value through concentration and output.\n\u2022 To be the go-to option for IT-enabled services that optimize and achieve operational excellence.\n\u2022 To develop into a provider of complete IT solutions."
+                            theme_text_color: "Custom"
+                            text_color: 0, 0, 0
+                            size_hint_y: None
+                            height: self.texture_size[1]
+                            font_name:"Caudex-Regular.ttf"
+                            font_size: "15.5sp"
+                            size_hint_x: None  # Disable relative width sizing
+                            width: dp(320)  # Set the fixed width of the label in density-independent pixels
+                        MDLabel:
+                            text: 'Our values'
+                            theme_text_color: "Custom"
+                            text_color: 0, 0, 0
+                            size_hint_y: None
+                            height: self.texture_size[1]
+                            font_name:"DMSerifDisplay-Regular.ttf"
+
+                        MDLabel:
+                            text: "Trust"
+                            theme_text_color: "Custom"
+                            text_color: 0, 0, 0
+                            size_hint_y: None
+                            height: self.texture_size[1]
+                            font_name:"Caudex-Bold.ttf"
+                            font_size: "15.5sp"
+                        MDLabel:
+                            text: "For us, a healthy partnership is built on trust. Thus,we make every effort to construct it. Sincerity is what we respect and demand. We are open and honest, yet where necessary, we use caution. We feel secure enough to be vulnerable with one another, our partners, and our clients."
+                            theme_text_color: "Custom"
+                            text_color: 0, 0, 0
+                            size_hint_y: None
+                            height: self.texture_size[1]
+                            font_name:"Caudex-Regular.ttf"
+                            font_size: "15.5sp"
+                            size_hint_x: None  # Disable relative width sizing
+                            width: dp(320)  # Set the fixed width of the label in density-independent pixels
+                        MDLabel:
+                            text: "Collaboration"
+                            theme_text_color: "Custom"
+                            text_color: 0, 0, 0
+                            size_hint_y: None
+                            height: self.texture_size[1]
+                            font_name:"Caudex-Bold.ttf"
+                            font_size: "15.5sp"
+                        MDLabel:
+                            text: "Whether it’s for a client project or an internal cooperation, we promote teamwork. Together, we establish procedures and norms, which we then adhere to. We adopt a partner mindset, engaging, offering assistance, brainstorming, and exchanging expertise to accomplish shared objectives."
+                            theme_text_color: "Custom"
+                            text_color: 0, 0, 0
+                            size_hint_y: None
+                            height: self.texture_size[1]
+                            font_name:"Caudex-Regular.ttf"
+                            font_size: "15.5sp"
+                            size_hint_x: None  # Disable relative width sizing
+                            width: dp(320)  # Set the fixed width of the label in density-independent pixels
+                        MDLabel:
+                            text: "Commitment"
+                            theme_text_color: "Custom"
+                            text_color: 0, 0, 0
+                            size_hint_y: None
+                            height: self.texture_size[1]
+                            font_name:"Caudex-Bold.ttf"
+                            font_size: "15.5sp"
+                        MDLabel:
+                            text: "We give it our all and fulfill our commitments by demonstrating our ability, aptitude, zeal, and sincerity. We put forth a lot of effort along with sincere passion for what we do. We hold ourselves responsible for completing tasks such that we either meet or surpass expectations."
+                            theme_text_color: "Custom"
+                            text_color: 0, 0, 0
+                            size_hint_y: None
+                            height: self.texture_size[1]
+                            font_name:"Caudex-Regular.ttf"
+                            font_size: "15.5sp"
+                            size_hint_x: None  # Disable relative width sizing
+                            width: dp(320)  # Set the fixed width of the label in density-independent pixels
+                        MDLabel:
+                            text: "Innovation"
+                            theme_text_color: "Custom"
+                            text_color: 0, 0, 0
+                            size_hint_y: None
+                            height: self.texture_size[1]
+                            font_name:"Caudex-Bold.ttf"
+                            font_size: "15.5sp"
+                        MDLabel:
+                            text: "We constantly absorb the newest technological developments. This assists us in creating a creatively stimulating atmosphere. In this manner, we provide pertinent expertise and abilities to every project. We have unconventional thinking. We don’t hesitate to try new things, experiment, and modify our approaches to fit our objectives."
+                            theme_text_color: "Custom"
+                            text_color: 0, 0, 0
+                            size_hint_y: None
+                            height: self.texture_size[1]
+                            font_name:"Caudex-Regular.ttf"
+                            font_size: "15.5sp"
+                            size_hint_x: None  # Disable relative width sizing
+                            width: dp(320)  # Set the fixed width of the label in density-independent pixels
+                        MDLabel:
+                            text: "Integrity"
+                            theme_text_color: "Custom"
+                            text_color: 0, 0, 0
+                            size_hint_y: None
+                            height: self.texture_size[1]
+                            font_name:"Caudex-Bold.ttf"
+                            font_size: "15.5sp"
+                        MDLabel:
+                            text: "We constantly strive to do what is right and are dependable, fair, and honest."
+                            theme_text_color: "Custom"
+                            text_color: 0, 0, 0
+                            size_hint_y: None
+                            height: self.texture_size[1]
+                            font_name:"Caudex-Regular.ttf"
+                            font_size: "15.5sp"
+                            size_hint_x: None  # Disable relative width sizing
+                            width: dp(320)  # Set the fixed width of the label in density-independent pixels
+                    # Bottom container for buttons (adjusted size_hint_y)
+                    BoxLayout:
+                        canvas.before:
+                            Color:
+                                rgba: 251/255, 232/255, 166/255, 1  # Set the color using the rgba values for #FBE8A6
+                            Rectangle:
+                                size: self.size  # Set the size to match the BoxLayout size
+                                pos: self.pos
+
+                        size_hint_y: None  # Don't take up full height
+                        size_hint_x: None
+                        width: dp(360)
+                        height: dp(210)  # Adjust height as needed
+                        padding: dp(16)  # Add padding for spacing
+                        pos_hint:{'center_x':0.5,'center_y':0.8}
+                        spacing: 0  # Remove spacing between widgets
+
+                        # Inner BoxLayout for centering buttons
+                        BoxLayout:
+                            orientation: 'vertical'
+                            padding: dp(21)  # Add padding for spacing
+                            spacing: dp(20)  # Space between buttons
+                            size_hint_x: 1  # Occupy maximum width
+                            pos_hint: {'center_x': 0.5}  # Center horizontally
+
+                            MDLabel:
+                                text: "Have a Project on mind?"
+                                theme_text_color: "Custom"
+                                text_color: 0, 0, 0
+                                size_hint_y: None
+                                height: self.texture_size[1]
+                                font_name:"CormorantGaramond-SemiBold.ttf"
+                                font_size: "23sp"
+
+                            MDLabel:
+                                text: "We can help you bring your ideas to life.\nLet’s talk about what we can build and\nraise together."
+                                theme_text_color: "Custom"
+                                text_color: 0, 0, 0
+                                size_hint_y: None
+                                height: self.texture_size[1]
+                                font_name:"Caudex-Regular.ttf"
+                                font_size: "14sp"
+
+
+
+                            MDTextButton:
+                                text: "Connect with us!"
+                                theme_text_color: "Custom"
+                                text_color: 0, 0, 0  # Black text color
+                                font_size: "16dp"  # Adjust font size as needed
+                                font_name: "TT Interphases Pro Trial DemiBold.ttf"
+                                padding: dp(16), dp(8)  # Adjust padding as needed
+                                size_hint: None, None
+                                pos_hint: {'center_x': 0.28, 'center_y': 0.5}
+                                canvas.before:
+                                    Color:
+                                        rgba: 251/255, 232/255, 166/255, 1  # Background color (adjust as needed)
+                                    RoundedRectangle:
+                                        size: self.size
+                                        pos: self.pos
+                                        radius: [dp(8), dp(8), dp(8), dp(8)]  # Adjust corner radius as needed
+                                    Color:
+                                        rgba: 0, 0, 0, 1  # Border color (black in this example)
+                                    Line:
+                                        width: dp(0.2)  # Adjust border width as needed
+                                        rectangle: (self.x, self.y, self.width, self.height)  # Use rectangle property to draw border
+
+                                on_release:
+                                    app.open_url4()
+
+
+                    BoxLayout:
+                        canvas.before:
+                            Color:
+                                rgba: 1, 1, 1, 0.5  # Set the color (white in this example)
+                            Rectangle:
+                                source:"connect.jpg"
+                                size: self.size  # Set the size to match the BoxLayout size
+                                pos: self.pos
+                        size_hint_y: None
+                        orientation: 'vertical'
+                        height: dp(250)
+                        padding: dp(16)
+                        spacing: dp(37)  # Add spacing between layouts
+
+                    BoxLayout:
+
+                        canvas.before:
+                            Color:
+                                rgba: 59/255, 60/255, 54/255, 1  # Set the color (gray in this example)
+                            Rectangle:
+                                size: self.size  # Set the size to match the BoxLayout size
+                                pos: self.pos
+                        size_hint_y: None
+                        orientation: 'vertical'
+                        height: dp(480)
+                        padding: dp(16)
+                        spacing: dp(16)  # Remove spacing between layouts
+                        MDLabel:
+                            text: 'Let us together build your academic career.'
+                            theme_text_color: "Custom"
+                            text_color: 1, 1, 1, 1
+                            size_hint_y: None
+                            height: self.texture_size[1]
+                            font_name:"DMSerifDisplay-Regular.ttf"
+                            font_size:"25dp"
+                            size_hint_x: None  # Disable relative width sizing
+                            width: dp(320)  # Set the fixed width of the label in density-independent pixels
+                        MDLabel:
+                            text: "We stand as a beacon for students and scholars alike, offering a comprehensive array of services tailored to fuel academic success. Whether embarking on research endeavors, tackling complex projects, or delving into software development, our platform provides the resources and expertise necessary to navigate the academic landscape with confidence. With a commitment to excellence and a dedication to fostering growth, we empower individuals to achieve their educational goals and realize their full potential. Join us on this journey as we work hand in hand to cultivate a path towards academic triumph.\n\n"
+                            theme_text_color: "Custom"
+                            text_color: 1, 1, 1, 1
+                            size_hint_y: None
+                            height: self.texture_size[1]
+                            font_name:"Caudex-Regular.ttf"
+                            font_size: "15.5sp"
+                            size_hint_x: None  # Disable relative width sizing
+                            width: dp(320)  # Set the fixed width of the label in density-independent pixels
+                    BoxLayout:
+                        canvas.before:
+                            Color:
+                                rgba: 243/255, 240/255, 229/255, 1  # Set the color (gray in this example)
+                            Rectangle:
+                                size: self.size  # Set the size to match the BoxLayout size
+                                pos: self.pos
+                        size_hint_y: None
+                        orientation: 'vertical'
+                        height: dp(1207)
+                        padding: dp(16)
+                        spacing: dp(16)  # Remove spacing between layouts
+                        MDLabel:
+                            text: 'Your Trusted Partners'
+                            theme_text_color: "Custom"
+                            text_color: 59/255, 60/255, 54/255, 1
+                            size_hint_y: None
+                            height: self.texture_size[1]
+                            font_name:"Fontspring-DEMO-masiva_bold.otf"
+                        MDLabel:
+                            text: 'Highly Motivated Team\nwith Innovative Ideas'
+                            theme_text_color: "Custom"
+                            text_color: 0, 0, 0
+                            size_hint_y: None
+                            height: self.texture_size[1]
+                            font_name:"DMSerifDisplay-Regular.ttf"
+                            font_size:"25dp"
+                            size_hint_x: None  # Disable relative width sizing
+                            width: dp(320)  # Set the fixed width of the label in density-independent pixels
+                        MDLabel:
+                            text: "We love what we do and therefore come up with the best possible solutions to help you set and grow online quickly. We are your trusted partners you can count on.\n"
+                            theme_text_color: "Custom"
+                            text_color: 0, 0, 0
+                            size_hint_y: None
+                            height: self.texture_size[1]
+                            font_name:"Caudex-Regular.ttf"
+                            font_size: "15.5sp"
+                            size_hint_x: None  # Disable relative width sizing
+                            width: dp(320)  # Set the fixed width of the label in density-independent pixels
+                        Image:
+                            source:"lastcrop1.png"  # Specify the path to your image file
+                            size_hint:(None,None)  # Disable size hint to set a fixed size
+                            size:(370, 370)  # Set the width and height of the image in pixels
+                            pos_hint:{'center_x': 0.425}  # Center the image horizontally and place it towards the bottom
+                            # You can alternatively use 'pos' attribute to set the position directly.
+                        Image:
+                            source:"lastcrop2.png"  # Specify the path to your image file
+                            size_hint:(None,None)  # Disable size hint to set a fixed size
+                            size:(370, 370)  # Set the width and height of the image in pixels
+                            pos_hint:{'center_x': 0.425}  # Center the image horizontally and place it towards the bottom
+                            # You can alternatively use 'pos' attribute to set the position directly.
+                        Image:
+                            source:"lastcrop3.png"  # Specify the path to your image file
+                            size_hint:(None,None)  # Disable size hint to set a fixed size
+                            size:(370, 370)  # Set the width and height of the image in pixels
+                            pos_hint:{'center_x': 0.425}  # Center the image horizontally and place it towards the bottom
+                            # You can alternatively use 'pos' attribute to set the position directly.
+                    BoxLayout:
+                        canvas.before:
+                            Color:
+                                rgba: 251/255, 232/255, 166/255, 1
+                            Rectangle:
+                                size: self.size  # Set the size to match the BoxLayout size
+                                pos: self.pos
+                        size_hint_y: None
+                        orientation: 'vertical'
+                        height: dp(230)
+                        padding: dp(16)
+                        spacing: dp(7)  # Remove spacing between layouts
+
+
+                        MDLabel:
+                            text: 'About Us'
+                            theme_text_color: "Custom"
+                            text_color: 0, 0, 0
+                            size_hint_y: None
+                            height: self.texture_size[1]
+                            font_name:"DMSerifDisplay-Regular.ttf"
+                            font_size:"25dp"
+                            size_hint_x: None  # Disable relative width sizing
+                            width: dp(320)  # Set the fixed width of the label in density-independent pixels
+
+                        MDLabel:
+                            text: "Byte Code Crafters is established as a tech \n firm where individuals can receive \nall-encompassing technological and academic assistance. Our primary focus is on research mentorship, academic projects, web designing,\nmobile application development, and support\nfor publications.\n"
+                            theme_text_color: "Custom"
+                            text_color: 0, 0, 0
+                            size_hint_y: None
+                            height: self.texture_size[1]
+                            font_name:"Caudex-Regular.ttf"
+                            font_size: "15.5sp"
+                            size_hint_x: None  # Disable relative width sizing
+                            width: dp(320)  # Set the fixed width of the label in density-independent pixels
+
+                    BoxLayout:
+                        canvas.before:
+                            Color:
+                                rgba: 1, 1, 1, 1  # Set the color (gray in this example)
+                            Rectangle:
+                                size: self.size  # Set the size to match the BoxLayout size
+                                pos: self.pos
+                            Color:
+                                rgba: 0.843, 0.843, 0.843, 1
+                            Line:
+                                points: self.x, self.y + dp(50), self.right, self.y + dp(50)
+                                width: dp(0.2)
+
+                        size_hint_y: None
+                        orientation: 'vertical'
+                        height: dp(520)
+                        padding: dp(16)
+                        spacing: dp(16) # Remove spacing between layouts
+                        Image:
+                            source:"bytecodelogo2.png"  # Specify the path to your image file
+                            size_hint:(None,None)  # Disable size hint to set a fixed size
+                            size:(230, 230)  # Set the width and height of the image in pixels
+                            pos_hint:{'center_x': 0.410}  # Center the image horizontally and place it towards the bottom
+                            # You can alternatively use 'pos' attribute to set the position directly.
+
+                        MDLabel:
+                            text: "India | Head office - kochi | Chennai"
+                            theme_text_color: "Custom"
+                            text_color: 0.3, 0.3, 0.3, 1
+                            size_hint_y: None
+                            height: self.texture_size[1]
+                            pos_hint:{'center_x': 0.535}
+                            font_name:"AcehSoft-Regular.ttf"
+                            font_size: "15.5sp"
+                            size_hint_x: None  # Disable relative width sizing
+                            width: dp(320)  # Set the fixed width of the label in density-independent pixels
+
+                        MDLabel:
+                            text: "Europe/UK/Middle East"
+                            theme_text_color: "Custom"
+                            text_color: 0.3, 0.3, 0.3, 1
+                            size_hint_y: None
+                            height: self.texture_size[1]
+                            pos_hint:{'center_x': 0.61}
+                            font_name:"AcehSoft-Regular.ttf"
+                            font_size: "15.5sp"
+                            size_hint_x: None  # Disable relative width sizing
+                            width: dp(320)  # Set the fixed width of the label in density-independent pixels
+                        MDLabel:
+                            text: "bytecodecrafters@gmail.com\n"
+                            theme_text_color: "Custom"
+                            text_color: 0.3, 0.3, 0.3, 1
+                            size_hint_y: None
+                            height: self.texture_size[1]
+                            pos_hint:{'center_x': 0.57}
+                            font_name:"AcehSoft-Regular.ttf"
+                            font_size: "15.5sp"
+                            size_hint_x: None  # Disable relative width sizing
+                            width: dp(320)  # Set the fixed width of the label in density-independent pixels
+                        Widget:
+                            size_hint_y: None
+                            height: dp(25)  # Adjust the space between the button and the label
+                        BoxLayout:
+                            size_hint_y: None
+                            orientation: 'horizontal'
+                            height: dp(50)
+                            padding: dp(16)
+                            spacing: dp(25)
+                            pos_hint: {'center_x': 0.7, 'center_y': 0.5}
+
+                            MDIconButton:
+                                icon: "instagram"
+                                theme_text_color: "Custom"
+                                text_color: 0.3, 0.3, 0.3, 1
+                                size_hint: None, None
+                                size: dp(0.1), dp(0.1)
+                                on_release: app.open_url5()  # Update the on_release function as needed
+
+                            MDIconButton:
+                                icon: "whatsapp"
+                                theme_text_color: "Custom"
+                                text_color: 0.3, 0.3, 0.3, 1
+                                size_hint: None, None
+                                size: dp(0.1), dp(0.1)
+                                on_release: app.open_url4()  # Update the on_release function as needed
+
+                        MDLabel:
+                            text: "\n"
+                            theme_text_color: "Custom"
+                            text_color: 0.5, 0.5, 0.5, 1
+                            size_hint_y: None
+                            height: self.texture_size[1]
+                            pos_hint:{'center_x': 0.61}
+                            font_name:"AcehSoft-Regular.ttf"
+                            font_size: "15.5sp"
+                            size_hint_x: None  # Disable relative width sizing
+                            width: dp(320)  # Set the fixed width of the label in density-independent pixels
+
+                        MDLabel:
+                            text: "Copyright © 2024 ByteCode Crafters | Powered by ByteCode Crafters"
+                            theme_text_color: "Custom"
+                            text_color: 0.4, 0.4, 0.4, 1
+                            size_hint_y: None
+                            height: self.texture_size[1]
+                            pos_hint:{'center_x': 0.45 }
+                            font_name:"Aceh-Light.ttf"
+                            font_size: "11sp"
+                            size_hint_x: None  # Disable relative width sizing
+                            width: dp(320)  # Set the fixed width of the label in density-independent pixels
+
+
+<ServicePage>:
+    name: "service"
+    BoxLayout:
+        orientation: 'vertical'
+
+        MDTopAppBar:
+            title: "BYTECODE CRAFTERS"
+            elevation: 1
+            left_action_items: [['menu', lambda x: root.dropmenu(x)]]
+            right_action_items: [['account', lambda x: root.drpmenu(x)]]
+
+        ScrollView:
+            pos_hint: {'center_x': 0.5}  # Center the ScrollView horizontally
+            MDGridLayout:
+                cols: 1
+                adaptive_height: True
+                spacing: 0  # Remove spacing between layouts
+                padding: dp(0), dp(0), dp(0), dp(0)  # Set padding to 0 on all sides
+
+                BoxLayout:
+                    canvas.before:
+                        Color:
+                            rgba: 1, 1, 1, 0.5  # Set the background color (white in this example)
+                        Rectangle:
+                            source: "servicehead.jpg"
+                            size: self.size  # Set the size to match the BoxLayout size
+                            pos: self.pos
+
+
+                    size_hint_y: None
+                    orientation: 'vertical'
+                    height: dp(235)
+                    padding: dp(16)
+                    spacing: dp(16)  # Add spacing between layouts
+
+                    MDLabel:
+                        text: 'Services'
+                        theme_text_color: "Custom"
+                        text_color: 1, 1, 1, 1
+                        font_size: "25sp"
+                        size_hint_y: None
+                        height: self.texture_size[1]
+                        font_name: "DMSerifDisplay-Regular.ttf"
+                        pos_hint: {'center_x': 0.55, 'center_y': 1}  # Center the MDLabel
+
+                BoxLayout:
+                    canvas.before:
+                        Color:
+                            rgba: 251/255, 232/255, 166/255, 1  # Set the background color (gray in this example)
+                        Rectangle:
+                            size: self.size  # Match the BoxLayout size
+                            pos: self.pos
+                        Color:
+                            rgba: 0.643, 0.643, 0.643, 0.5
+                        Line:
+                            points: self.x, self.y + dp(220), self.right, self.y + dp(220)
+                            width: dp(0.2)
+
+                        Color:
+                            rgba: 0.643, 0.643, 0.643, 0.5
+                        Line:
+                            points: self.x, self.y + dp(420), self.right, self.y + dp(420)
+                            width: dp(0.2)
+
+                        Color:
+                            rgba: 0.643, 0.643, 0.643, 0.5
+                        Line:
+                            points: self.x, self.y + dp(660), self.right, self.y + dp(660)
+                            width: dp(0.2)
+                    size_hint_y: None
+                    orientation: 'vertical'
+                    height: dp(754)
+                    padding: dp(16)
+                    spacing: dp(16)  # Adjust spacing between widgets
+
+                    MDLabel:
+                        text: 'How can we help you?\n'
+                        theme_text_color: "Custom"
+                        text_color: 0, 0, 0
+                        size_hint_y: None
+                        height: self.texture_size[1]
+                        font_name: "DMSerifDisplay-Regular.ttf"
+                        font_size: "25dp"
+                        size_hint_x: None
+                        pos_hint: {'center_x': 0.62, 'center_y': 0.8}  # Adjust vertical position
+                        width: dp(320)
+
+                    MDLabel:
+                        text: "Software Development"
+                        theme_text_color: "Custom"
+                        text_color: 0, 0, 0
+                        size_hint_y: None
+                        height: self.texture_size[1]
+                        font_name: "Caudex-Regular.ttf"
+                        font_size: "15.5sp"
+                        size_hint_x: None
+                        pos_hint: {'center_x': 0.5, 'center_y': 0.6}  # Adjust vertical position
+                        width: dp(320)
+
+                    MDLabel:
+                        text: "Elevate your software development projects with personalized mentorship. Our experienced mentors provide guidance tailored to your needs, helping you achieve excellence in every aspect of your development endeavors."
+                        theme_text_color: "Custom"
+                        text_color: 0, 0, 0
+                        size_hint_y: None
+                        height: self.texture_size[1]
+                        font_name: "Caudex-Regular.ttf"
+                        font_size: "13.5sp"
+                        size_hint_x: None
+                        pos_hint: {'center_x': 0.47, 'center_y': 0.4}  # Adjust vertical position
+                        width: dp(300)
+
+                    Widget:
+                        size_hint_y: None
+                        height: dp(3)  # Adjust the space between the button and the label
+
+                    MDTextButton:
+                        text: "Get In Touch"
+                        theme_text_color: "Custom"
+                        text_color: 0, 0, 0, 1  # Black text color
+                        font_size: "16sp"  # Adjust font size as needed
+                        font_name: "TT Interphases Pro Trial DemiBold.ttf"
+                        padding: dp(16), dp(8)  # Adjust padding as needed
+                        size_hint: None, None
+                        pos_hint: {'center_x': 0.21, 'center_y': 0.5}
+                        canvas.before:
+                            Color:
+                                rgba: 251/255, 232/255, 166/255, 1  # Background color (adjust as needed)
+                            RoundedRectangle:
+                                size: self.size
+                                pos: self.pos
+                                radius: [dp(8), dp(8), dp(8), dp(8)]  # Adjust corner radius as needed
+                            Color:
+                                rgba: 0, 0, 0, 1  # Border color (black in this example)
+                            Line:
+                                width: dp(0.2)  # Adjust border width as needed
+                                rectangle: (self.x, self.y, self.width, self.height)  # Use rectangle property to draw border
+
+                        on_release:
+                            app.root.get_screen('service').open_url()
+
+                    Widget:
+                        size_hint_y: None
+                        height: dp(12)  # Adjust the space between the button and the label
+
+                    MDLabel:
+                        text: "Research Mentorship"
+                        theme_text_color: "Custom"
+                        text_color: 0, 0, 0
+                        size_hint_y: None
+                        height: self.texture_size[1]
+                        font_name: "Caudex-Regular.ttf"
+                        font_size: "15.5sp"
+                        size_hint_x: None
+                        pos_hint: {'center_x': 0.5, 'center_y': 0.6}  # Adjust vertical position
+                        width: dp(320)
+
+                    MDLabel:
+                        text: "Unlock research potential with personalized mentorship. Elevate your skills and explore new horizons with our experienced mentors."
+                        theme_text_color: "Custom"
+                        text_color: 0, 0, 0
+                        size_hint_y: None
+                        height: self.texture_size[1]
+                        font_name: "Caudex-Regular.ttf"
+                        font_size: "13sp"
+                        size_hint_x: None
+                        pos_hint: {'center_x': 0.47, 'center_y': 0.4}  # Adjust vertical position
+                        width: dp(300)
+
+                    Widget:
+                        size_hint_y: None
+                        height: dp(3)  # Adjust the space between the button and the label
+
+                    MDTextButton:
+                        text: "Get In Touch"
+                        theme_text_color: "Custom"
+                        text_color: 0, 0, 0, 1  # Black text color
+                        font_size: "16sp"  # Adjust font size as needed
+                        font_name: "TT Interphases Pro Trial DemiBold.ttf"
+                        padding: dp(16), dp(8)  # Adjust padding as needed
+                        size_hint: None, None
+                        pos_hint: {'center_x': 0.21, 'center_y': 0.5}
+                        canvas.before:
+                            Color:
+                                rgba: 251/255, 232/255, 166/255, 1  # Background color (adjust as needed)
+                            RoundedRectangle:
+                                size: self.size
+                                pos: self.pos
+                                radius: [dp(8), dp(8), dp(8), dp(8)]  # Adjust corner radius as needed
+                            Color:
+                                rgba: 0, 0, 0, 1  # Border color (black in this example)
+                            Line:
+                                width: dp(0.2)  # Adjust border width as needed
+                                rectangle: (self.x, self.y, self.width, self.height)  # Use rectangle property to draw border
+
+                        on_release:
+                            app.root.get_screen('service').open_url2()
+
+                    Widget:
+                        size_hint_y: None
+                        height: dp(12)  # Adjust the space between the button and the label
+
+                    MDLabel:
+                        text: "Academic projects"
+                        theme_text_color: "Custom"
+                        text_color: 0, 0, 0
+                        size_hint_y: None
+                        height: self.texture_size[1]
+                        font_name: "Caudex-Regular.ttf"
+                        font_size: "15.5sp"
+                        size_hint_x: None
+                        pos_hint: {'center_x': 0.5, 'center_y': 0.6}  # Adjust vertical position
+                        width: dp(320)
+
+                    MDLabel:
+                        text: "Enhance your academic projects with personalized mentorship. Benefit from experienced guidance to elevate your skills and achieve project excellence."
+                        theme_text_color: "Custom"
+                        text_color: 0, 0, 0
+                        size_hint_y: None
+                        height: self.texture_size[1]
+                        font_name: "Caudex-Regular.ttf"
+                        font_size: "13sp"
+                        size_hint_x: None
+                        pos_hint: {'center_x': 0.47, 'center_y': 0.4}  # Adjust vertical position
+                        width: dp(300)
+
+                    Widget:
+                        size_hint_y: None
+                        height: dp(3)  # Adjust the space between the button and the label
+
+                    MDTextButton:
+                        text: "Get In Touch"
+                        theme_text_color: "Custom"
+                        text_color: 0, 0, 0, 1  # Black text color
+                        font_size: "16sp"  # Adjust font size as needed
+                        font_name: "TT Interphases Pro Trial DemiBold.ttf"
+                        padding: dp(16), dp(8)  # Adjust padding as needed
+                        size_hint: None, None
+                        pos_hint: {'center_x': 0.21, 'center_y': 0.5}
+                        canvas.before:
+                            Color:
+                                rgba: 251/255, 232/255, 166/255, 1  # Background color (adjust as needed)
+                            RoundedRectangle:
+                                size: self.size
+                                pos: self.pos
+                                radius: [dp(8), dp(8), dp(8), dp(8)]  # Adjust corner radius as needed
+                            Color:
+                                rgba: 0, 0, 0, 1  # Border color (black in this example)
+                            Line:
+                                width: dp(0.2)  # Adjust border width as needed
+                                rectangle: (self.x, self.y, self.width, self.height)  # Use rectangle property to draw border
+
+                        on_release:
+                            app.root.get_screen('service').open_url3()
+
+                    Widget:
+                        size_hint_y: None
+                        height: dp(12)  # Adjust the space between the button and the label
+
+
+
+                BoxLayout:
+                    canvas.before:
+                        Color:
+                            rgba: 1, 1, 1, 1  # Set the color (gray in this example)
+                        Rectangle:
+                            size: self.size  # Set the size to match the BoxLayout size
+                            pos: self.pos
+                        Color:
+                            rgba: 0.843, 0.843, 0.843, 1
+                        Line:
+                            points: self.x, self.y + dp(50), self.right, self.y + dp(50)
+                            width: dp(0.2)
+                    size_hint_y: None
+                    orientation: 'vertical'
+                    height: dp(520)
+                    padding: dp(16)
+                    spacing: dp(16) # Remove spacing between layouts
+
+                    Image:
+                        source:"bytecodelogo2.png"  # Specify the path to your image file
+                        size_hint:(None,None)  # Disable size hint to set a fixed size
+                        size:(230, 230)  # Set the width and height of the image in pixels
+                        pos_hint:{'center_x': 0.485}  # Center the image horizontally and place it towards the bottom
+                        # You can alternatively use 'pos' attribute to set the position directly.
+
+                    MDLabel:
+                        text: "India | Head office - kochi | Chennai"
+                        theme_text_color: "Custom"
+                        text_color: 0.3, 0.3, 0.3, 1
+                        size_hint_y: None
+                        height: self.texture_size[1]
+                        pos_hint:{'center_x': 0.635}
+                        font_name:"AcehSoft-Regular.ttf"
+                        font_size: "15.5sp"
+                        size_hint_x: None  # Disable relative width sizing
+                        width: dp(320)  # Set the fixed width of the label in density-independent pixels
+
+                    MDLabel:
+                        text: "Europe/UK/Middle East"
+                        theme_text_color: "Custom"
+                        text_color: 0.3, 0.3, 0.3, 1
+                        size_hint_y: None
+                        height: self.texture_size[1]
+                        pos_hint:{'center_x': 0.72}
+                        font_name:"AcehSoft-Regular.ttf"
+                        font_size: "15.5sp"
+                        size_hint_x: None  # Disable relative width sizing
+                        width: dp(320)  # Set the fixed width of the label in density-independent pixels
+                    MDLabel:
+                        text: "bytecodecrafters@gmail.com\n"
+                        theme_text_color: "Custom"
+                        text_color: 0.3, 0.3, 0.3, 1
+                        size_hint_y: None
+                        height: self.texture_size[1]
+                        pos_hint:{'center_x': 0.68}
+                        font_name:"AcehSoft-Regular.ttf"
+                        font_size: "15.5sp"
+                        size_hint_x: None  # Disable relative width sizing
+                        width: dp(320)  # Set the fixed width of the label in density-independent pixels
+                    Widget:
+                        size_hint_y: None
+                        height: dp(25)  # Adjust the space between the button and the label
+                    BoxLayout:
+                        size_hint_y: None
+                        orientation: 'horizontal'
+                        height: dp(50)
+                        padding: dp(16)
+                        spacing: dp(25)
+                        pos_hint: {'center_x': 0.75, 'center_y': 0.5}
+
+                        MDIconButton:
+                            icon: "instagram"
+                            theme_text_color: "Custom"
+                            text_color: 0.3, 0.3, 0.3, 1
+                            size_hint: None, None
+                            size: dp(0.1), dp(0.1)
+                            on_release: app.open_url5()  # Update the on_release function as needed
+
+                        MDIconButton:
+                            icon: "whatsapp"
+                            theme_text_color: "Custom"
+                            text_color: 0.3, 0.3, 0.3, 1
+                            size_hint: None, None
+                            size: dp(0.1), dp(0.1)
+                            on_release: app.open_url4()  # Update the on_release function as needed
+
+
+                    MDLabel:
+                        text: "\n"
+                        theme_text_color: "Custom"
+                        text_color: 0.5, 0.5, 0.5, 1
+                        size_hint_y: None
+                        height: self.texture_size[1]
+                        pos_hint:{'center_x': 0.61}
+                        font_name:"AcehSoft-Regular.ttf"
+                        font_size: "15.5sp"
+                        size_hint_x: None  # Disable relative width sizing
+                        width: dp(320)  # Set the fixed width of the label in density-independent pixels
+
+                    MDLabel:
+                        text: "Copyright © 2024 ByteCode Crafters | Powered by ByteCode Crafters"
+                        theme_text_color: "Custom"
+                        text_color: 0.4, 0.4, 0.4, 1
+                        size_hint_y: None
+                        height: self.texture_size[1]
+                        pos_hint:{'center_x': 0.5 }
+                        font_name:"Aceh-Light.ttf"
+                        font_size: "11sp"
+                        size_hint_x: None  # Disable relative width sizing
+                        width: dp(320)  # Set the fixed width of the label in density-independent pixels
+
+
+
+
+<JournalPage>:
+    name: "journal"
+    BoxLayout:
+        orientation: 'vertical'
+
+        MDTopAppBar:
+            title: "BYTECODE CRAFTERS"
+            elevation: 1
+            left_action_items: [['menu', lambda x: root.dropmenu(x)]]
+            right_action_items: [['account', lambda x: root.drpmenu(x)]]
+
+        ScrollView:
+            pos_hint: {'center_x': 0.5}  # Center the ScrollView horizontally
+            MDGridLayout:
+                cols: 1
+                adaptive_height: True
+                spacing: 0  # Remove spacing between layouts
+                padding: dp(0), dp(0), dp(0), dp(0)  # Set padding to 0 on all sides
+
+                BoxLayout:
+                    canvas.before:
+                        Color:
+                            rgba: 1, 1, 1, 0.5  # Set the background color (white in this example)
+                        Rectangle:
+                            source: "servicehead.jpg"
+                            size: self.size  # Set the size to match the BoxLayout size
+                            pos: self.pos
+
+
+                    size_hint_y: None
+                    orientation: 'vertical'
+                    height: dp(235)
+                    padding: dp(16)
+                    spacing: dp(16)  # Add spacing between layouts
+
+                    MDLabel:
+                        text: 'Journals'
+                        theme_text_color: "Custom"
+                        text_color: 1, 1, 1, 1
+                        font_size: "25sp"
+                        size_hint_y: None
+                        height: self.texture_size[1]
+                        font_name: "DMSerifDisplay-Regular.ttf"
+                        pos_hint: {'center_x': 0.55, 'center_y': 1}  # Center the MDLabel
+
+                BoxLayout:
+                    orientation: 'vertical'
+                    padding: dp(10)
+                    size_hint_y: None
+                    height: dp(1500)
+
+                    canvas.before:
+                        Color:
+                            rgba: 243/255, 240/255, 229/255, 1  # Background color #F3F0E5
+                        Rectangle:
+                            size: self.size
+                            pos: self.pos
+
+                    BoxLayout:
+                        orientation: 'vertical'
+                        size_hint_y: None
+                        height: dp(1460)
+
+                        canvas.before:
+                            Color:
+                                rgba: 1, 1, 1, 1  # White background
+                            Rectangle:
+                                size: self.size
+                                pos: self.pos
+
+                        padding: dp(16)
+                        spacing: dp(16)
+
+                        MDLabel:
+                            text: '[b]Annals  of  Engineering Mathematics and Computational Intelligence[/b]'
+                            markup: True
+                            theme_text_color: "Custom"
+                            text_color: 0, 0, 0
+                            font_size: "21sp"  # Adjust font size as needed
+                            size_hint_y: None
+                            height: self.texture_size[1]
+                            font_name: "DMSerifDisplay-Regular.ttf"
+                            line_height: 0.75
+                            halign: 'justify'
+
+                        # Subtitle
+                        MDLabel:
+                            text: '[b]Annals of Engineering Mathematics and Computational Intelligence (AEMCI)[/b] is a peer-reviewed, open access, and international journal that publishes high-quality articles on all aspects of network forensics and intelligent computing, with a focus on current research, novel ideas, cutting-edge techniques, and approaches for early detection. It also publishes articles on both basic and advanced topics in these fields. Some of the broader categories covered by the field such as, system knowledge, advanced network and digital forensics, as well as mathematical intelligence, computational quality programs, artificial intelligence, data analytics, machine learning, cyber security initiatives, network based security devices and engineering solutions. Additionally, it addresses and associates novel scientific problems, namely data collection, creation, storage, retrieval, sharing, analysis, security, integration, distribution, optimization, and visualization, together with integrative analysis across heterogeneous and interdependent complex resources for better collaboration, decision-making, and ultimately value creation are some among them.'
+                            markup: True
+                            theme_text_color: "Custom"
+                            text_color: 0, 0, 0
+                            size_hint_y: None
+                            height: self.texture_size[1]
+                            font_name:"Causten-Regular.otf"
+                            font_size: "15.5sp"
+                            width: dp(340)  # Set the fixed width of the label in density-independent pixels
+                            halign: 'justify'
+                            line_height: 1.5
+
+                        Widget:
+                            size_hint_y: None
+                            height: dp(3)  # Adjust the space between the button and the label
+                        MDLabel:
+                            text: 'Annals of Engineering Mathematics and Computational Intelligence (AEMCI) is to advance the subject, debate new trends and possibilities, exchange ideas and practices, and encourage cross-domain and transdisciplinary collaborations by bringing together young scholars, researchers, industry professionals, and future users of network forensics and intelligent computing. In the fields of data informatics and intelligent computing, publish novel theoretical and experimental research publications.'
+                            markup: True
+                            theme_text_color: "Custom"
+                            text_color: 0, 0, 0
+                            size_hint_y: None
+                            height: self.texture_size[1]
+                            font_name:"Causten-Regular.otf"
+                            font_size: "15.5sp"
+                            width: dp(340)  # Set the fixed width of the label in density-independent pixels
+                            halign: 'justify'
+                            line_height: 1.5
+                        Widget:
+                            size_hint_y: None
+                            height: dp(3)  # Adjust the space between the button and the label
+
+                        MDLabel:
+                            text: 'This journal’s main objective is to advance the use of mathematics in engineering and the applied sciences. It also seeks to highlight the inherent unity of the fundamental issues in applied and engineering research through the use of mathematics.\nThis journal articles on mathematical analysis and its many applications are presented. The magazine has a strong emphasis on papers dealing with the mathematical treatment of issues that arise from diverse engineering observations, especially they emphasize innovative problems and their solutions.'
+                            markup: True
+                            theme_text_color: "Custom"
+                            text_color: 0, 0, 0
+                            size_hint_y: None
+                            height: self.texture_size[1]
+                            font_name:"Causten-Regular.otf"
+                            font_size: "15.5sp"
+                            width: dp(340)  # Set the fixed width of the label in density-independent pixels
+                            halign: 'justify'
+                            line_height: 1.5
+
+
+
+                        MDLabel:
+                            text: "Editors-in-Chief:  Dr. Bhraguram T M &"
+                            markup: True
+                            theme_text_color: "Custom"
+                            text_color: 0, 0, 0
+                            size_hint_y: None
+                            height: self.texture_size[1]
+                            font_name:"Causten-Regular.otf"
+                            font_size: "15.5sp"
+                            width: dp(340)  # Set the fixed width of the label in density-independent pixels
+                            halign: 'justify'
+
+
+                        MDLabel:
+                            text: "Dr. Shermin S"
+                            markup: True
+                            theme_text_color: "Custom"
+                            text_color: 0, 0, 0
+                            size_hint_y: None
+                            height: self.texture_size[1]
+                            font_name:"Causten-Regular.otf"
+                            font_size: "15.5sp"
+                            pos_hint: {'center_x': 0.86, 'center_y': 0.1}
+                            width: dp(340)  # Set the fixed width of the label in density-independent pixels
+                            halign: 'justify'
+
+                        Widget:
+                            size_hint_y: None
+                            height: dp(43)  # Adjust the space between the button and the label
+
+
+                    Widget:
+                        size_hint_y: None
+                        height: dp(7)  # Adjust the space between the button and the label
+
+
+                BoxLayout:
+                    canvas.before:
+                        Color:
+                            rgba: 1, 1, 1, 1  # Set the color (gray in this example)
+                        Rectangle:
+                            size: self.size  # Set the size to match the BoxLayout size
+                            pos: self.pos
+                        Color:
+                            rgba: 0.843, 0.843, 0.843, 1
+                        Line:
+                            points: self.x, self.y + dp(50), self.right, self.y + dp(50)
+                            width: dp(0.2)
+                    size_hint_y: None
+                    orientation: 'vertical'
+                    height: dp(520)
+                    padding: dp(16)
+                    spacing: dp(16) # Remove spacing between layouts
+
+                    Image:
+                        source:"bytecodelogo2.png"  # Specify the path to your image file
+                        size_hint:(None,None)  # Disable size hint to set a fixed size
+                        size:(230, 230)  # Set the width and height of the image in pixels
+                        pos_hint:{'center_x': 0.485}  # Center the image horizontally and place it towards the bottom
+                        # You can alternatively use 'pos' attribute to set the position directly.
+
+                    MDLabel:
+                        text: "India | Head office - kochi | Chennai"
+                        theme_text_color: "Custom"
+                        text_color: 0.3, 0.3, 0.3, 1
+                        size_hint_y: None
+                        height: self.texture_size[1]
+                        pos_hint:{'center_x': 0.635}
+                        font_name:"AcehSoft-Regular.ttf"
+                        font_size: "15.5sp"
+                        size_hint_x: None  # Disable relative width sizing
+                        width: dp(320)  # Set the fixed width of the label in density-independent pixels
+
+                    MDLabel:
+                        text: "Europe/UK/Middle East"
+                        theme_text_color: "Custom"
+                        text_color: 0.3, 0.3, 0.3, 1
+                        size_hint_y: None
+                        height: self.texture_size[1]
+                        pos_hint:{'center_x': 0.72}
+                        font_name:"AcehSoft-Regular.ttf"
+                        font_size: "15.5sp"
+                        size_hint_x: None  # Disable relative width sizing
+                        width: dp(320)  # Set the fixed width of the label in density-independent pixels
+                    MDLabel:
+                        text: "bytecodecrafters@gmail.com\n"
+                        theme_text_color: "Custom"
+                        text_color: 0.3, 0.3, 0.3, 1
+                        size_hint_y: None
+                        height: self.texture_size[1]
+                        pos_hint:{'center_x': 0.68}
+                        font_name:"AcehSoft-Regular.ttf"
+                        font_size: "15.5sp"
+                        size_hint_x: None  # Disable relative width sizing
+                        width: dp(320)  # Set the fixed width of the label in density-independent pixels
+                    Widget:
+                        size_hint_y: None
+                        height: dp(25)  # Adjust the space between the button and the label
+                    BoxLayout:
+                        size_hint_y: None
+                        orientation: 'horizontal'
+                        height: dp(50)
+                        padding: dp(16)
+                        spacing: dp(25)
+                        pos_hint: {'center_x': 0.75, 'center_y': 0.5}
+
+                        MDIconButton:
+                            icon: "instagram"
+                            theme_text_color: "Custom"
+                            text_color: 0.3, 0.3, 0.3, 1
+                            size_hint: None, None
+                            size: dp(0.1), dp(0.1)
+                            on_release: app.open_url5()  # Update the on_release function as needed
+
+                        MDIconButton:
+                            icon: "whatsapp"
+                            theme_text_color: "Custom"
+                            text_color: 0.3, 0.3, 0.3, 1
+                            size_hint: None, None
+                            size: dp(0.1), dp(0.1)
+                            on_release: app.open_url4()  # Update the on_release function as needed
+
+
+                    MDLabel:
+                        text: "\n"
+                        theme_text_color: "Custom"
+                        text_color: 0.5, 0.5, 0.5, 1
+                        size_hint_y: None
+                        height: self.texture_size[1]
+                        pos_hint:{'center_x': 0.61}
+                        font_name:"AcehSoft-Regular.ttf"
+                        font_size: "15.5sp"
+                        size_hint_x: None  # Disable relative width sizing
+                        width: dp(320)  # Set the fixed width of the label in density-independent pixels
+
+                    MDLabel:
+                        text: "Copyright © 2024 ByteCode Crafters | Powered by ByteCode Crafters"
+                        theme_text_color: "Custom"
+                        text_color: 0.4, 0.4, 0.4, 1
+                        size_hint_y: None
+                        height: self.texture_size[1]
+                        pos_hint:{'center_x': 0.5 }
+                        font_name:"Aceh-Light.ttf"
+                        font_size: "11sp"
+                        size_hint_x: None  # Disable relative width sizing
+                        width: dp(320)  # Set the fixed width of the label in density-independent pixels
+
+
+<ContactPage>:
+    name: "contact"
+    BoxLayout:
+        orientation: 'vertical'
+
+        MDTopAppBar:
+            title: "BYTECODE CRAFTERS"
+            elevation: 1
+            left_action_items: [['menu', lambda x: root.dropmenu(x)]]
+            right_action_items: [['account', lambda x: root.drpmenu(x)]]
+
+        ScrollView:
+            pos_hint: {'center_x': 0.5}  # Center the ScrollView horizontally
+            MDGridLayout:
+                cols: 1
+                adaptive_height: True
+                spacing: 0  # Remove spacing between layouts
+                padding: dp(0), dp(0), dp(0), dp(0)  # Set padding to 0 on all sides
+
+                BoxLayout:
+                    canvas.before:
+                        Color:
+                            rgba: 1, 1, 1, 0.5  # Set the background color (white in this example)
+                        Rectangle:
+                            source: "servicehead.jpg"
+                            size: self.size  # Set the size to match the BoxLayout size
+                            pos: self.pos
+
+
+                    size_hint_y: None
+                    orientation: 'vertical'
+                    height: dp(235)
+                    padding: dp(16)
+                    spacing: dp(16)  # Add spacing between layouts
+
+                    MDLabel:
+                        text: 'Contact'
+                        theme_text_color: "Custom"
+                        text_color: 1, 1, 1, 1
+                        font_size: "25sp"
+                        size_hint_y: None
+                        height: self.texture_size[1]
+                        font_name: "DMSerifDisplay-Regular.ttf"
+                        pos_hint: {'center_x': 0.55, 'center_y': 1}  # Center the MDLabel
+
+                BoxLayout:
+                    canvas.before:
+                        Color:
+                            rgba: 251/255, 232/255, 166/255, 1  # Set the background color (gray in this example)
+                        Rectangle:
+                            size: self.size  # Match the BoxLayout size
+                            pos: self.pos
+
+                    size_hint_y: None
+                    orientation: 'vertical'
+                    height: dp(400)
+                    padding: dp(16)
+                    spacing: dp(16)  # Adjust spacing between widgets
+
+                    MDLabel:
+                        text: 'We are here to help!'
+                        theme_text_color: "Custom"
+                        text_color: 0, 0, 0
+                        size_hint_y: None
+                        height: self.texture_size[1]
+                        font_name: "DMSerifDisplay-Regular.ttf"
+                        font_size: "25dp"
+                        size_hint_x: None
+                        pos_hint: {'center_x': 0.55, 'center_y': 0.1}  # Adjust vertical position
+                        width: dp(320)
+
+                    BoxLayout:
+                        size_hint_y: None
+                        orientation: 'horizontal'
+                        height: dp(50)  # Adjust the height as needed
+                        padding: dp(16)
+                        spacing: dp(16)  # Adjust spacing between widgets
+                        pos_hint: {'center_x': 0.5, 'center_y': 0.5}  # Center the BoxLayout horizontally and vertically
+
+                        MDIcon:
+                            icon: "map-marker"
+                            theme_text_color: "Custom"
+                            text_color: 0, 0, 0
+                            size_hint: None, None
+                            size: dp(12), dp(12)  # Adjust the size of the icon
+                            pos_hint: {'center_x': 0.5, 'center_y': 0.7}  # Move the icon up vertically
+
+                        MDLabel:
+                            text: 'Head office - Kochi | Chennai, India and Europe/UK/Middle East'
+                            theme_text_color: "Custom"
+                            text_color: 0, 0, 0
+                            size_hint_y: None
+                            height: self.texture_size[1]
+                            font_name: "AcehSoft-Regular.ttf"
+                            font_size: "16dp"
+                            size_hint_x: None
+                            width: dp(250)
+                            pos_hint: {'center_y': 0.5}  # Center the label vertically
+                            line_height: 1.4
+
+                    BoxLayout:
+                        size_hint_y: None
+                        orientation: 'horizontal'
+                        height: dp(50)  # Adjust the height as needed
+                        padding: dp(16)
+                        spacing: dp(16)  # Adjust spacing between widgets
+                        pos_hint: {'center_x': 0.5, 'center_y': 0.5}  # Center the BoxLayout horizontally and vertically
+
+                        MDIcon:
+                            icon: "phone"
+                            theme_text_color: "Custom"
+                            text_color: 0, 0, 0
+                            size_hint: None, None
+                            size: dp(12), dp(12)  # Adjust the size of the icon
+                            pos_hint: {'center_x': 0.5, 'center_y': 0.7}  # Move the icon up vertically
+
+                        MDLabel:
+                            text: '+91 8714045374, +44 7407 106268, +44 7548 904036'
+                            theme_text_color: "Custom"
+                            text_color: 0, 0, 0
+                            size_hint_y: None
+                            height: self.texture_size[1]
+                            font_name: "AcehSoft-Regular.ttf"
+                            font_size: "16dp"
+                            size_hint_x: None
+                            width: dp(230)
+                            pos_hint: {'center_y': 0.5}  # Center the label vertically
+                            line_height: 1.4
+
+                    BoxLayout:
+                        size_hint_y: None
+                        orientation: 'horizontal'
+                        height: dp(50)  # Adjust the height as needed
+                        padding: dp(16)
+                        spacing: dp(16)  # Adjust spacing between widgets
+                        pos_hint: {'center_x': 0.5, 'center_y': 0.5}  # Center the BoxLayout horizontally and vertically
+
+                        MDIcon:
+                            icon: "email-outline"
+                            theme_text_color: "Custom"
+                            text_color: 0, 0, 0
+                            size_hint: None, None
+                            size: dp(12), dp(12)  # Adjust the size of the icon
+                            pos_hint: {'center_x': 0.5, 'center_y': 0.7}  # Move the icon up vertically
+
+                        MDLabel:
+                            text: 'bytecodecrafters@gmail.com'
+                            theme_text_color: "Custom"
+                            text_color: 0, 0, 0
+                            size_hint_y: None
+                            height: self.texture_size[1]
+                            font_name: "AcehSoft-Regular.ttf"
+                            font_size: "16dp"
+                            size_hint_x: None
+                            width: dp(230)
+                            pos_hint: {'center_y': 0.5}  # Center the label vertically
+                            line_height: 1.4
+
+                    MDLabel:
+                        text: 'Follow us'
+                        theme_text_color: "Custom"
+                        text_color: 0, 0, 0
+                        size_hint_y: None
+                        height: self.texture_size[1]
+                        font_name: "DMSerifDisplay-Regular.ttf"
+                        font_size: "19dp"
+                        size_hint_x: None
+                        pos_hint: {'center_x': 0.54, 'center_y': 0.8}  # Adjust vertical position
+                        width: dp(320)
+
+                    BoxLayout:
+                        size_hint_y: None
+                        orientation: 'horizontal'
+                        height: dp(50)  # Adjust the height as needed
+                        padding: dp(16)
+                        spacing: dp(25)  # Adjust spacing between widgets
+                        pos_hint: {'center_x': 0.5, 'center_y': 0.5}  # Center the BoxLayout horizontally and vertically
+
+                        MDIcon:
+                            icon: "instagram"
+                            theme_text_color: "Custom"
+                            text_color: 0, 0, 0
+                            size_hint: None, None
+                            size: dp(0.1), dp(0.1)  # Adjust the size of the icon
+                            pos_hint: {'center_x': 0.5, 'center_y': 0.7}  # Move the icon up vertically
+                            on_touch_down: root.instagram()
+
+                        MDIcon:
+                            icon: "whatsapp"
+                            theme_text_color: "Custom"
+                            text_color: 0, 0, 0
+                            size_hint: None, None
+                            size: dp(0.1), dp(0.1)  # Adjust the size of the icon
+                            pos_hint: {'center_x': 0.5, 'center_y': 0.7}  # Move the icon up vertically
+                            on_touch_down: root.whatsapp()
+
+
+                BoxLayout:
+                    canvas.before:
+                        Color:
+                            rgba: 1, 1, 1, 1  # Set the background color (gray in this example)
+                        Rectangle:
+                            size: self.size  # Match the BoxLayout size
+                            pos: self.pos
+
+                    size_hint_y: None
+                    orientation: 'vertical'
+                    height: dp(100)
+                    padding: dp(16)
+                    spacing: dp(16)  # Adjust spacing between widgets
+                    pos_hint: {'center_y': 0.5}  # Center the BoxLayout vertically
+
+                    MDLabel:
+                        text: 'Send us a message'
+                        theme_text_color: "Custom"
+                        text_color: 0, 0, 0
+                        size_hint_y: None
+                        height: self.texture_size[1]
+                        font_name: "DMSerifDisplay-Regular.ttf"
+                        font_size: "25dp"
+                        size_hint_x: None
+                        pos_hint: {'center_x': 0.55}  # Center the label horizontally
+                        width: dp(320)
+                        on_touch_down: root.whatsapp()
+
+
+
+
+                BoxLayout:
+                    size_hint_y: None
+                    height: dp(300)
+                    orientation: 'vertical'
+
+                    MapView:
+                        id: map_view
+                        size_hint: 1, 1  # Fill the available space
+                        zoom: 12
+                        lat: 9.963819  # Latitude for Kochi
+                        lon: 76.251839  # Longitude for Kochi
+
+                    BoxLayout:
+                        canvas.before:
+                            Color:
+                                rgba: 1, 1, 1, 1  # Set the background color (gray in this example)
+                            Rectangle:
+                                size: self.size  # Match the BoxLayout size
+                                pos: self.pos
+                        size_hint_y: None
+                        height: dp(64)
+                        orientation: 'horizontal'
+                        padding: dp(8)
+                        spacing: dp(8)
+
+                        MDIconButton:
+                            size_hint_x: 0.3
+                            style: "elevated"
+                            icon:'plus'
+                            on_release: map_view.zoom += 1
+                            elevation_normal:
+                            md_bg_color: 0.6, 0.6, 0.6, 1
+
+
+
+                        MDIconButton:
+                            size_hint_x: 0.3
+                            style: "elevated"
+                            icon:'minus'
+                            on_release: map_view.zoom -= 1
+                            elevation_normal:
+                            md_bg_color: 0.6, 0.6, 0.6, 1
+
+                BoxLayout:
+                    canvas.before:
+                        Color:
+                            rgba: 1, 1, 1, 1  # Set the color (gray in this example)
+                        Rectangle:
+                            size: self.size  # Set the size to match the BoxLayout size
+                            pos: self.pos
+                        Color:
+                            rgba: 0.843, 0.843, 0.843, 1
+                        Line:
+                            points: self.x, self.y + dp(50), self.right, self.y + dp(50)
+                            width: dp(0.2)
+                    size_hint_y: None
+                    orientation: 'vertical'
+                    height: dp(520)
+                    padding: dp(16)
+                    spacing: dp(16) # Remove spacing between layouts
+
+                    Image:
+                        source:"bytecodelogo2.png"  # Specify the path to your image file
+                        size_hint:(None,None)  # Disable size hint to set a fixed size
+                        size:(230, 230)  # Set the width and height of the image in pixels
+                        pos_hint:{'center_x': 0.485}  # Center the image horizontally and place it towards the bottom
+                        # You can alternatively use 'pos' attribute to set the position directly.
+
+                    MDLabel:
+                        text: "India | Head office - kochi | Chennai"
+                        theme_text_color: "Custom"
+                        text_color: 0.3, 0.3, 0.3, 1
+                        size_hint_y: None
+                        height: self.texture_size[1]
+                        pos_hint:{'center_x': 0.635}
+                        font_name:"AcehSoft-Regular.ttf"
+                        font_size: "15.5sp"
+                        size_hint_x: None  # Disable relative width sizing
+                        width: dp(320)  # Set the fixed width of the label in density-independent pixels
+
+                    MDLabel:
+                        text: "Europe/UK/Middle East"
+                        theme_text_color: "Custom"
+                        text_color: 0.3, 0.3, 0.3, 1
+                        size_hint_y: None
+                        height: self.texture_size[1]
+                        pos_hint:{'center_x': 0.72}
+                        font_name:"AcehSoft-Regular.ttf"
+                        font_size: "15.5sp"
+                        size_hint_x: None  # Disable relative width sizing
+                        width: dp(320)  # Set the fixed width of the label in density-independent pixels
+                    MDLabel:
+                        text: "bytecodecrafters@gmail.com\n"
+                        theme_text_color: "Custom"
+                        text_color: 0.3, 0.3, 0.3, 1
+                        size_hint_y: None
+                        height: self.texture_size[1]
+                        pos_hint:{'center_x': 0.68}
+                        font_name:"AcehSoft-Regular.ttf"
+                        font_size: "15.5sp"
+                        size_hint_x: None  # Disable relative width sizing
+                        width: dp(320)  # Set the fixed width of the label in density-independent pixels
+
+                    Widget:
+                        size_hint_y: None
+                        height: dp(25)  # Adjust the space between the button and the label
+                    BoxLayout:
+                        size_hint_y: None
+                        orientation: 'horizontal'
+                        height: dp(50)
+                        padding: dp(16)
+                        spacing: dp(25)
+                        pos_hint: {'center_x': 0.75, 'center_y': 0.5}
+
+                        MDIconButton:
+                            icon: "instagram"
+                            theme_text_color: "Custom"
+                            text_color: 0.3, 0.3, 0.3, 1
+                            size_hint: None, None
+                            size: dp(0.1), dp(0.1)
+                            on_release: app.open_url5()  # Update the on_release function as needed
+
+                        MDIconButton:
+                            icon: "whatsapp"
+                            theme_text_color: "Custom"
+                            text_color: 0.3, 0.3, 0.3, 1
+                            size_hint: None, None
+                            size: dp(0.1), dp(0.1)
+                            on_release: app.open_url4()  # Update the on_release function as needed
+
+
+
+                    MDLabel:
+                        text: "\n"
+                        theme_text_color: "Custom"
+                        text_color: 0.5, 0.5, 0.5, 1
+                        size_hint_y: None
+                        height: self.texture_size[1]
+                        pos_hint:{'center_x': 0.61}
+                        font_name:"AcehSoft-Regular.ttf"
+                        font_size: "15.5sp"
+                        size_hint_x: None  # Disable relative width sizing
+                        width: dp(320)  # Set the fixed width of the label in density-independent pixels
+
+                    MDLabel:
+                        text: "Copyright © 2024 ByteCode Crafters | Powered by ByteCode Crafters"
+                        theme_text_color: "Custom"
+                        text_color: 0.4, 0.4, 0.4, 1
+                        size_hint_y: None
+                        height: self.texture_size[1]
+                        pos_hint:{'center_x': 0.5 }
+                        font_name:"Aceh-Light.ttf"
+                        font_size: "11sp"
+                        size_hint_x: None  # Disable relative width sizing
+                        width: dp(320)  # Set the fixed width of the label in density-independent pixels
+
+
+
+<AccountPage>:
+    name: "account"
+    BoxLayout:
+        orientation: 'vertical'
+
+        MDTopAppBar:
+            title: "BYTECODE CRAFTERS"
+            elevation: 1
+            left_action_items: [['menu', lambda x: root.dropmenu(x)]]
+            right_action_items: [['account', lambda x: root.drpmenu(x)]]
+
+        ScrollView:
+            pos_hint: {'center_x': 0.5}  # Center the ScrollView horizontally
+            MDGridLayout:
+                cols: 1
+                adaptive_height: True
+                spacing: 0  # Remove spacing between layouts
+                padding: dp(0), dp(0), dp(0), dp(0)  # Set padding to 0 on all sides
+
+
+
+                BoxLayout:
+                    orientation: 'vertical'
+                    padding: dp(10)
+                    size_hint_y: None
+                    height: dp(522)
+
+                    canvas.before:
+                        Color:
+                            rgba: 243/255, 240/255, 229/255, 1  # Background color #F3F0E5
+                        Rectangle:
+                            size: self.size
+                            pos: self.pos
+                    Widget:
+                        size_hint_y: None
+                        height: dp(7)  # Adjust the space between the button and the label
+
+                    BoxLayout:
+                        orientation: 'vertical'
+                        size_hint_y: None
+                        height: dp(490)
+
+                        canvas.before:
+                            Color:
+                                rgba: 1, 1, 1, 1  # White background
+                            Rectangle:
+                                size: self.size
+                                pos: self.pos
+
+                        padding: dp(16)
+                        spacing: dp(16)
+                        MDBoxLayout:
+                            orientation: 'horizontal'
+                            size_hint_y: None
+                            height: dp(30)  # Adjust the height as needed
+                            spacing:dp(7)
+
+                            MDIcon:
+                                icon: 'account'
+
+                                size: dp(24), dp(24)  # Adjust the size of the icon as needed
+                                theme_text_color: "Custom"
+                                text_color: 0, 0, 0, 1  # Set the icon color to black
+                                pos_hint: {'center_y': 0.75}
+
+                            MDLabel:
+                                text: '[b]Account[/b]'
+                                markup: True
+                                theme_text_color: "Custom"
+                                text_color: 0, 0, 0
+                                font_size: "21sp"  # Adjust font size as needed
+                                size_hint_y: None
+                                height: self.texture_size[1]
+                                font_name: "DMSerifDisplay-Regular.ttf"
+                                line_height: 0.75
+                                halign: 'justify'
+
+                        BoxLayout:
+                            orientation: 'vertical'
+                            height: dp(100)
+                            padding: dp(8)
+
+                            AsyncImage:
+                                source: 'usericon.png'  # Replace with the actual path to your image
+                                size_hint: None, None
+                                size: dp(160), dp(160)  # Set the desired size for the image
+                                radius: [dp(40)]  # Make the image round
+                                pos_hint: {'center_x': 0.5}
+
+                            MDLabel:
+                                id : username
+                                text: 'username'
+                                theme_text_color: "Custom"
+                                text_color: 85/255, 85/255, 85/255, 1
+                                font_name: "Aceh-Light.ttf"
+                                font_size: "21sp"
+                                valign: "center"
+                                font_name: "Fontspring-DEMO-sonnygothic-regular.otf"
+                                halign: "center"
+                                size_hint_y: 0.5
+
+
+                        MDList:
+
+                            padding: dp(16)
+                            spacing: dp(16)
+
+                            MDCard:
+                                orientation: 'vertical'
+                                size_hint: None, None
+                                size: root.width * 0.8, dp(52)
+
+                                radius: [dp(7)]
+                                pos_hint: {'center_x': 0.5}
+                                md_bg_color: 243/255, 240/255, 229/255, 1
+                                on_release: root.accountdetail()
+
+                                BoxLayout:
+                                    orientation: 'horizontal'
+                                    padding: dp(8)
+
+                                    IconLeftWidget:
+                                        icon: "account"
+                                        theme_text_color: "Custom"
+                                        text_color: 85/255, 85/255, 85/255, 1
+                                        on_release: root.accountdetail()
+
+                                    MDLabel:
+                                        text: "Account"
+                                        theme_text_color: "Custom"
+                                        text_color: 85/255, 85/255, 85/255, 1
+                                        font_name: "Aceh-Light.ttf"
+                                        font_size: "14sp"
+                                        valign: "center"
+                                        font_name: "Fontspring-DEMO-sonnygothic-regular.otf"
+                                        halign: "left"
+                                        size_hint_x: 0.7
+
+
+                                    MDIconButton:
+                                        icon: "chevron-right"
+                                        on_release: root.manager.current = "account detail"
+                                        theme_text_color: "Custom"
+                                        text_color: 85/255, 85/255, 85/255, 1
+                                        pos_hint: {"center_y": 0.5}  # Center the button vertically
+
+                            MDCard:
+                                orientation: 'vertical'
+                                size_hint: None, None
+                                size: root.width * 0.8, dp(52)
+
+                                radius: [dp(7)]
+                                pos_hint: {'center_x': 0.5}
+                                md_bg_color: 243/255, 240/255, 229/255, 1
+                                on_release: root.changepassword()
+
+                                BoxLayout:
+                                    orientation: 'horizontal'
+                                    padding: dp(8)
+
+                                    IconLeftWidget:
+                                        icon: "lock-reset"
+                                        theme_text_color: "Custom"
+                                        text_color: 85/255, 85/255, 85/255, 1
+                                        on_release: root.changepassword()
+
+                                    MDLabel:
+                                        text: "Change Password"
+                                        theme_text_color: "Custom"
+                                        text_color: 85/255, 85/255, 85/255, 1
+                                        font_name: "Aceh-Light.ttf"
+                                        font_size: "14sp"
+                                        valign: "center"
+                                        font_name: "Fontspring-DEMO-sonnygothic-regular.otf"
+                                        halign: "left"
+                                        size_hint_x: 0.7
+
+                                    MDIconButton:
+                                        icon: "chevron-right"
+                                        on_release: root.manager.current = "password"
+                                        theme_text_color: "Custom"
+                                        text_color: 85/255, 85/255, 85/255, 1
+                                        pos_hint: {"center_y": 0.5}  # Center the button vertically
+
+                            MDCard:
+                                orientation: 'vertical'
+                                size_hint: None, None
+                                size: root.width * 0.8, dp(52)
+
+                                radius: [dp(7)]
+                                pos_hint: {'center_x': 0.5}
+                                md_bg_color: 243/255, 240/255, 229/255, 1
+                                on_release: root.deleteaccount()
+
+                                BoxLayout:
+                                    orientation: 'horizontal'
+                                    padding: dp(8)
+
+
+                                    IconLeftWidget:
+                                        icon: "delete"
+                                        theme_text_color: "Custom"
+                                        text_color: 85/255, 85/255, 85/255, 1
+                                        on_release: root.deleteaccount()
+
+                                    MDLabel:
+                                        text: "Delete Account"
+                                        theme_text_color: "Custom"
+                                        text_color: 85/255, 85/255, 85/255, 1
+                                        font_name: "Aceh-Light.ttf"
+                                        font_size: "14sp"
+                                        font_name: "Fontspring-DEMO-sonnygothic-regular.otf"
+                                        valign: "center"
+                                        halign: "left"
+                                        size_hint_x: 0.7
+
+
+                                    MDIconButton:
+                                        icon: "chevron-right"
+                                        on_release: root.manager.current = "delete account"
+                                        theme_text_color: "Custom"
+                                        text_color: 85/255, 85/255, 85/255, 1
+                                        pos_hint: {"center_y": 0.5}  # Center the button vertically
+
+
+                        Widget:
+                            size_hint_y: None
+                            height: dp(25)  # Adjust the space between the button and the label
+
+
+                    Widget:
+                        size_hint_y: None
+                        height: dp(7)  # Adjust the space between the button and the label
+
+
+                BoxLayout:
+                    canvas.before:
+                        Color:
+                            rgba: 1, 1, 1, 1  # Set the color (gray in this example)
+                        Rectangle:
+                            size: self.size  # Set the size to match the BoxLayout size
+                            pos: self.pos
+                        Color:
+                            rgba: 0.843, 0.843, 0.843, 1
+                        Line:
+                            points: self.x, self.y + dp(50), self.right, self.y + dp(50)
+                            width: dp(0.2)
+                    size_hint_y: None
+                    orientation: 'vertical'
+                    height: dp(520)
+                    padding: dp(16)
+                    spacing: dp(16) # Remove spacing between layouts
+
+                    Image:
+                        source:"bytecodelogo2.png"  # Specify the path to your image file
+                        size_hint:(None,None)  # Disable size hint to set a fixed size
+                        size:(230, 230)  # Set the width and height of the image in pixels
+                        pos_hint:{'center_x': 0.485}  # Center the image horizontally and place it towards the bottom
+                        # You can alternatively use 'pos' attribute to set the position directly.
+
+                    MDLabel:
+                        text: "India | Head office - kochi | Chennai"
+                        theme_text_color: "Custom"
+                        text_color: 0.3, 0.3, 0.3, 1
+                        size_hint_y: None
+                        height: self.texture_size[1]
+                        pos_hint:{'center_x': 0.635}
+                        font_name:"AcehSoft-Regular.ttf"
+                        font_size: "15.5sp"
+                        size_hint_x: None  # Disable relative width sizing
+                        width: dp(320)  # Set the fixed width of the label in density-independent pixels
+
+                    MDLabel:
+                        text: "Europe/UK/Middle East"
+                        theme_text_color: "Custom"
+                        text_color: 0.3, 0.3, 0.3, 1
+                        size_hint_y: None
+                        height: self.texture_size[1]
+                        pos_hint:{'center_x': 0.72}
+                        font_name:"AcehSoft-Regular.ttf"
+                        font_size: "15.5sp"
+                        size_hint_x: None  # Disable relative width sizing
+                        width: dp(320)  # Set the fixed width of the label in density-independent pixels
+                    MDLabel:
+                        text: "bytecodecrafters@gmail.com\n"
+                        theme_text_color: "Custom"
+                        text_color: 0.3, 0.3, 0.3, 1
+                        size_hint_y: None
+                        height: self.texture_size[1]
+                        pos_hint:{'center_x': 0.68}
+                        font_name:"AcehSoft-Regular.ttf"
+                        font_size: "15.5sp"
+                        size_hint_x: None  # Disable relative width sizing
+                        width: dp(320)  # Set the fixed width of the label in density-independent pixels
+                    Widget:
+                        size_hint_y: None
+                        height: dp(25)  # Adjust the space between the button and the label
+                    BoxLayout:
+                        size_hint_y: None
+                        orientation: 'horizontal'
+                        height: dp(50)
+                        padding: dp(16)
+                        spacing: dp(25)
+                        pos_hint: {'center_x': 0.75, 'center_y': 0.5}
+
+                        MDIconButton:
+                            icon: "instagram"
+                            theme_text_color: "Custom"
+                            text_color: 0.3, 0.3, 0.3, 1
+                            size_hint: None, None
+                            size: dp(0.1), dp(0.1)
+                            on_release: app.open_url5()  # Update the on_release function as needed
+
+                        MDIconButton:
+                            icon: "whatsapp"
+                            theme_text_color: "Custom"
+                            text_color: 0.3, 0.3, 0.3, 1
+                            size_hint: None, None
+                            size: dp(0.1), dp(0.1)
+                            on_release: app.open_url4()  # Update the on_release function as needed
+
+
+                    MDLabel:
+                        text: "\n"
+                        theme_text_color: "Custom"
+                        text_color: 0.5, 0.5, 0.5, 1
+                        size_hint_y: None
+                        height: self.texture_size[1]
+                        pos_hint:{'center_x': 0.61}
+                        font_name:"AcehSoft-Regular.ttf"
+                        font_size: "15.5sp"
+                        size_hint_x: None  # Disable relative width sizing
+                        width: dp(320)  # Set the fixed width of the label in density-independent pixels
+
+                    MDLabel:
+                        text: "Copyright © 2024 ByteCode Crafters | Powered by ByteCode Crafters"
+                        theme_text_color: "Custom"
+                        text_color: 0.4, 0.4, 0.4, 1
+                        size_hint_y: None
+                        height: self.texture_size[1]
+                        pos_hint:{'center_x': 0.5 }
+                        font_name:"Aceh-Light.ttf"
+                        font_size: "11sp"
+                        size_hint_x: None  # Disable relative width sizing
+                        width: dp(320)  # Set the fixed width of the label in density-independent pixels
+
+
+<AccountDetailPage>:
+    name: "account detail"
+    BoxLayout:
+        orientation: 'vertical'
+
+        MDTopAppBar:
+            title: "BYTECODE CRAFTERS"
+            elevation: 1
+            left_action_items: [['menu', lambda x: root.dropmenu(x)]]
+            right_action_items: [['account', lambda x: root.drpmenu(x)]]
+
+        ScrollView:
+            pos_hint: {'center_x': 0.5}  # Center the ScrollView horizontally
+            MDGridLayout:
+                cols: 1
+                adaptive_height: True
+                spacing: 0  # Remove spacing between layouts
+                padding: dp(0), dp(0), dp(0), dp(0)  # Set padding to 0 on all sides
+
+
+
+                BoxLayout:
+                    orientation: 'vertical'
+                    padding: dp(10)
+                    size_hint_y: None
+                    height: dp(472)
+
+                    canvas.before:
+                        Color:
+                            rgba: 243/255, 240/255, 229/255, 1  # Background color #F3F0E5
+                        Rectangle:
+                            size: self.size
+                            pos: self.pos
+                    Widget:
+                        size_hint_y: None
+                        height: dp(7)  # Adjust the space between the button and the label
+
+                    BoxLayout:
+                        orientation: 'vertical'
+                        size_hint_y: None
+                        height: dp(440)
+
+                        canvas.before:
+                            Color:
+                                rgba: 1, 1, 1, 1  # White background
+                            Rectangle:
+                                size: self.size
+                                pos: self.pos
+
+                        padding: dp(16)
+                        spacing: dp(16)
+                        MDBoxLayout:
+                            orientation: 'horizontal'
+                            size_hint_y: None
+                            height: dp(30)  # Adjust the height as needed
+                            spacing:dp(7)
+
+                            MDIcon:
+                                icon: 'account'
+                                size: dp(24), dp(24)  # Adjust the size of the icon as needed
+                                theme_text_color: "Custom"
+                                text_color: 85/255, 85/255, 85/255, 1  # Set the icon color to black
+                                pos_hint: {'center_y': 0.75}
+                            MDLabel:
+                                text: '[b]Account[/b]'
+                                markup: True
+                                theme_text_color: "Custom"
+                                text_color: 85/255, 85/255, 85/255, 1
+                                font_size: "18sp"  # Adjust font size as needed
+                                size_hint_y: None
+                                height: self.texture_size[1]
+                                font_name: "Fontspring-DEMO-sonnygothic-regular.otf"
+                                line_height: 0.75
+                                halign: 'justify'
+
+                        MDLabel:
+                            text: '[b]Username[/b]'
+                            markup: True
+                            theme_text_color: "Custom"
+                            text_color: 85/255, 85/255, 85/255, 1
+                            font_size: "16sp"  # Adjust font size as needed
+                            size_hint_y: None
+                            height: self.texture_size[1]
+                            font_name: "Fontspring-DEMO-sonnygothic-regular.otf"
+                            line_height: 0.75
+                            halign: 'justify'
+                        MDTextField:
+                            id: username
+                            mode: "round"
+                            font_size: "12dp"
+                            font_name: "Aceh-Regular.otf"
+                            size_hint_x: 1.00  # Increase the width
+                            height: dp(10)  # Set the specific height
+                            text_color_normal: 0.6, 0.6, 0.6, 1 # Set the text color to full black
+                            text_color_focus: 1, 1, 1, 1
+                            line_color_normal: 0.6, 0.6, 0.6, 1  # Set the line color to full black
+                            line_color_focus: 0, 0, 0, 1
+                            pos_hint: {'center_x': .5, 'center_y': .65}
+                            on_text: self.text = self.text.replace(" ", "")
+                        MDLabel:
+                            text: '[b]Email[/b]'
+                            markup: True
+                            theme_text_color: "Custom"
+                            text_color: 85/255, 85/255, 85/255, 1
+                            font_size: "16sp"  # Adjust font size as needed
+                            size_hint_y: None
+                            height: self.texture_size[1]
+                            font_name: "Fontspring-DEMO-sonnygothic-regular.otf"
+                            line_height: 0.75
+                            halign: 'justify'
+                        MDTextField:
+                            id: email
+                            mode: "round"
+                            font_size: "12dp"
+                            font_name: "Aceh-Regular.otf"
+                            size_hint_x: 1.00  # Increase the width
+                            height: dp(10)  # Set the specific height
+                            text_color_normal: 0.6, 0.6, 0.6, 1 # Set the text color to full black
+                            text_color_focus: 1, 1, 1, 1
+                            line_color_normal: 0.6, 0.6, 0.6, 1  # Set the line color to full black
+                            line_color_focus: 0, 0, 0, 1
+                            validator: "email"
+                            pos_hint: {'center_x': .5, 'center_y': .65}
+                            on_text: self.text = self.text.replace(" ", "")
+                        MDLabel:
+                            text: '[b]Mobile Number[/b]'
+                            markup: True
+                            theme_text_color: "Custom"
+                            text_color: 85/255, 85/255, 85/255, 1
+                            font_size: "16sp"  # Adjust font size as needed
+                            size_hint_y: None
+                            height: self.texture_size[1]
+                            font_name: "Fontspring-DEMO-sonnygothic-regular.otf"
+                            line_height: 0.75
+                            halign: 'justify'
+                        MDTextField:
+                            id: mobilenumber
+                            mode: "round"
+                            font_size: "12dp"
+                            input_filter: root.custom_input_filter
+                            helper_text: "Include country code"  # Update example with a country code
+                            helper_text_mode: "on_focus"
+                            helper_text_color_focus: 0, 0, 0, 1
+                            font_name: "Aceh-Regular.otf"
+                            size_hint_x: 1.00  # Increase the width
+                            height: dp(10)  # Set the specific height
+                            text_color_normal: 0.6, 0.6, 0.6, 1 # Set the text color to full black
+                            text_color_focus: 1, 1, 1, 1
+                            line_color_normal: 0.6, 0.6, 0.6, 1  # Set the line color to full black
+                            line_color_focus: 0, 0, 0, 1
+                            pos_hint: {'center_x': .5, 'center_y': .65}
+                            on_text: self.text = self.text.replace(" ", "")
+                            on_focus: if self.focus: root.open_menu()
+
+                        Widget:
+                            size_hint_y: None
+                            height: dp(7)  # Adjust the space between the button and the label
+                        MDFlatButton:
+                            text: "Update Account"
+                            font_size: 21
+                            theme_text_color: "Custom"
+                            text_color: 1, 1, 1, 1  # Match the text color of the MDLabel
+                            font_name: "Fontspring-DEMO-sonnygothic-regular.otf"
+                            md_bg_color: 0.6, 0.6, 0.6, 1  # Match the background color of the MDTextField
+                            pos_hint: {'center_x': .5, 'center_y': .55}
+                            on_press: root.update_data(username,mobilenumber,email)
+
+                        Widget:
+                            size_hint_y: None
+                            height: dp(16)  # Adjust the space between the button and the label
+
+
+                    Widget:
+                        size_hint_y: None
+                        height: dp(7)  # Adjust the space between the button and the label
+
+
+                BoxLayout:
+                    canvas.before:
+                        Color:
+                            rgba: 1, 1, 1, 1  # Set the color (gray in this example)
+                        Rectangle:
+                            size: self.size  # Set the size to match the BoxLayout size
+                            pos: self.pos
+                        Color:
+                            rgba: 0.843, 0.843, 0.843, 1
+                        Line:
+                            points: self.x, self.y + dp(50), self.right, self.y + dp(50)
+                            width: dp(0.2)
+                    size_hint_y: None
+                    orientation: 'vertical'
+                    height: dp(520)
+                    padding: dp(16)
+                    spacing: dp(16) # Remove spacing between layouts
+
+                    Image:
+                        source:"bytecodelogo2.png"  # Specify the path to your image file
+                        size_hint:(None,None)  # Disable size hint to set a fixed size
+                        size:(230, 230)  # Set the width and height of the image in pixels
+                        pos_hint:{'center_x': 0.485}  # Center the image horizontally and place it towards the bottom
+                        # You can alternatively use 'pos' attribute to set the position directly.
+
+                    MDLabel:
+                        text: "India | Head office - kochi | Chennai"
+                        theme_text_color: "Custom"
+                        text_color: 0.3, 0.3, 0.3, 1
+                        size_hint_y: None
+                        height: self.texture_size[1]
+                        pos_hint:{'center_x': 0.635}
+                        font_name:"AcehSoft-Regular.ttf"
+                        font_size: "15.5sp"
+                        size_hint_x: None  # Disable relative width sizing
+                        width: dp(320)  # Set the fixed width of the label in density-independent pixels
+
+                    MDLabel:
+                        text: "Europe/UK/Middle East"
+                        theme_text_color: "Custom"
+                        text_color: 0.3, 0.3, 0.3, 1
+                        size_hint_y: None
+                        height: self.texture_size[1]
+                        pos_hint:{'center_x': 0.72}
+                        font_name:"AcehSoft-Regular.ttf"
+                        font_size: "15.5sp"
+                        size_hint_x: None  # Disable relative width sizing
+                        width: dp(320)  # Set the fixed width of the label in density-independent pixels
+                    MDLabel:
+                        text: "bytecodecrafters@gmail.com\n"
+                        theme_text_color: "Custom"
+                        text_color: 0.3, 0.3, 0.3, 1
+                        size_hint_y: None
+                        height: self.texture_size[1]
+                        pos_hint:{'center_x': 0.68}
+                        font_name:"AcehSoft-Regular.ttf"
+                        font_size: "15.5sp"
+                        size_hint_x: None  # Disable relative width sizing
+                        width: dp(320)  # Set the fixed width of the label in density-independent pixels
+                    Widget:
+                        size_hint_y: None
+                        height: dp(25)  # Adjust the space between the button and the label
+                    BoxLayout:
+                        size_hint_y: None
+                        orientation: 'horizontal'
+                        height: dp(50)
+                        padding: dp(16)
+                        spacing: dp(25)
+                        pos_hint: {'center_x': 0.75, 'center_y': 0.5}
+
+                        MDIconButton:
+                            icon: "instagram"
+                            theme_text_color: "Custom"
+                            text_color: 0.3, 0.3, 0.3, 1
+                            size_hint: None, None
+                            size: dp(0.1), dp(0.1)
+                            on_release: app.open_url5()  # Update the on_release function as needed
+
+                        MDIconButton:
+                            icon: "whatsapp"
+                            theme_text_color: "Custom"
+                            text_color: 0.3, 0.3, 0.3, 1
+                            size_hint: None, None
+                            size: dp(0.1), dp(0.1)
+                            on_release: app.open_url4()  # Update the on_release function as needed
+
+
+                    MDLabel:
+                        text: "\n"
+                        theme_text_color: "Custom"
+                        text_color: 0.5, 0.5, 0.5, 1
+                        size_hint_y: None
+                        height: self.texture_size[1]
+                        pos_hint:{'center_x': 0.61}
+                        font_name:"AcehSoft-Regular.ttf"
+                        font_size: "15.5sp"
+                        size_hint_x: None  # Disable relative width sizing
+                        width: dp(320)  # Set the fixed width of the label in density-independent pixels
+
+                    MDLabel:
+                        text: "Copyright © 2024 ByteCode Crafters | Powered by ByteCode Crafters"
+                        theme_text_color: "Custom"
+                        text_color: 0.4, 0.4, 0.4, 1
+                        size_hint_y: None
+                        height: self.texture_size[1]
+                        pos_hint:{'center_x': 0.5 }
+                        font_name:"Aceh-Light.ttf"
+                        font_size: "11sp"
+                        size_hint_x: None  # Disable relative width sizing
+                        width: dp(320)  # Set the fixed width of the label in density-independent pixels
+
+
+<ChangePasswordPage>:
+    name: "password"
+    BoxLayout:
+        orientation: 'vertical'
+
+        MDTopAppBar:
+            title: "BYTECODE CRAFTERS"
+            elevation: 1
+            left_action_items: [['menu', lambda x: root.dropmenu(x)]]
+            right_action_items: [['account', lambda x: root.drpmenu(x)]]
+
+        ScrollView:
+            pos_hint: {'center_x': 0.5}  # Center the ScrollView horizontally
+            MDGridLayout:
+                cols: 1
+                adaptive_height: True
+                spacing: 0  # Remove spacing between layouts
+                padding: dp(0), dp(0), dp(0), dp(0)  # Set padding to 0 on all sides
+
+
+
+                BoxLayout:
+                    orientation: 'vertical'
+                    padding: dp(10)
+                    size_hint_y: None
+                    height: dp(472)
+
+                    canvas.before:
+                        Color:
+                            rgba: 243/255, 240/255, 229/255, 1  # Background color #F3F0E5
+                        Rectangle:
+                            size: self.size
+                            pos: self.pos
+
+                    Widget:
+                        size_hint_y: None
+                        height: dp(7)  # Adjust the space between the button and the label
+
+                    BoxLayout:
+                        orientation: 'vertical'
+                        size_hint_y: None
+                        height: dp(440)
+
+                        canvas.before:
+                            Color:
+                                rgba: 1, 1, 1, 1  # White background
+                            Rectangle:
+                                size: self.size
+                                pos: self.pos
+
+                        padding: dp(16)
+                        spacing: dp(16)
+
+                        MDBoxLayout:
+                            orientation: 'horizontal'
+                            size_hint_y: None
+                            height: dp(30)  # Adjust the height as needed
+                            spacing: dp(7)
+
+                            MDIcon:
+                                icon: 'lock-reset'
+                                size: dp(24), dp(24)  # Adjust the size of the icon as needed
+                                theme_text_color: "Custom"
+                                text_color: 85/255, 85/255, 85/255, 1  # Set the icon color to black
+                                pos_hint: {'center_y': 0.75}
+
+                            MDLabel:
+                                text: '[b]Change Password[/b]'
+                                markup: True
+                                theme_text_color: "Custom"
+                                text_color: 85/255, 85/255, 85/255, 1
+                                font_size: "18sp"  # Adjust font size as needed
+                                size_hint_y: None
+                                height: self.texture_size[1]
+                                font_name: "Fontspring-DEMO-sonnygothic-regular.otf"
+                                line_height: 0.75
+                                halign: 'justify'
+
+                        MDLabel:
+                            text: '[b]Current Password[/b]'
+                            markup: True
+                            theme_text_color: "Custom"
+                            text_color: 85/255, 85/255, 85/255, 1
+                            font_size: "16sp"  # Adjust font size as needed
+                            size_hint_y: None
+                            height: self.texture_size[1]
+                            font_name: "Fontspring-DEMO-sonnygothic-regular.otf"
+                            line_height: 0.75
+                            halign: 'justify'
+
+                        BoxLayout:
+                            orientation: 'horizontal'
+                            size_hint_x: 1.00
+                            height: dp(10)
+
+                            MDTextField:
+                                id: currentpassword
+                                mode: "round"
+                                font_size: "12dp"
+                                text_color_normal: 0.6, 0.6, 0.6, 1  # Set the text color to black
+                                text_color_focus: 1, 1, 1, 1
+                                line_color_normal: 0.6, 0.6, 0.6, 1  # Set the line color to black
+                                line_color_focus: 0, 0, 0, 1
+                                pos_hint: {'center_x': .5, 'center_y': .65}
+                                on_text: self.text = self.text.replace(" ", "")
+                                password: True
+
+                            MDIconButton:
+                                icon: 'eye-off'
+                                theme_text_color: "Custom"
+                                text_color: 0, 0, 0, 1
+
+                                pos_hint:{'center_y': 0.7 }
+                                on_release: root.toggle_password_visibility(currentpassword, self)
+                                size_hint: (0.15, 1)
+
+
+                        MDLabel:
+                            text: '[b]New Password[/b]'
+                            markup: True
+                            theme_text_color: "Custom"
+                            text_color: 85/255, 85/255, 85/255, 1
+                            font_size: "16sp"  # Adjust font size as needed
+                            size_hint_y: None
+                            height: self.texture_size[1]
+                            font_name: "Fontspring-DEMO-sonnygothic-regular.otf"
+                            line_height: 0.75
+                            halign: 'justify'
+
+                        BoxLayout:
+                            orientation: 'horizontal'
+                            size_hint_x: 1.00
+                            height: dp(10)
+
+                            MDTextField:
+                                id: newpassword
+                                mode: "round"
+                                font_size: "12dp"
+                                text_color_normal: 0.6, 0.6, 0.6, 1  # Set the text color to black
+                                text_color_focus: 1, 1, 1, 1
+                                line_color_normal: 0.6, 0.6, 0.6, 1  # Set the line color to black
+                                line_color_focus: 0, 0, 0, 1
+                                pos_hint: {'center_x': .5, 'center_y': .65}
+                                on_text: self.text = self.text.replace(" ", "")
+                                password: True
+
+                            MDIconButton:
+                                icon: 'eye-off'
+                                theme_text_color: "Custom"
+                                text_color: 0, 0, 0, 1
+                                pos_hint:{'center_y': 0.7 }
+                                on_release: root.toggle_password_visibility(newpassword, self)
+                                size_hint: (0.15, 1)
+
+
+                        MDLabel:
+                            text: '[b]Confirm Password[/b]'
+                            markup: True
+                            theme_text_color: "Custom"
+                            text_color: 85/255, 85/255, 85/255, 1
+                            font_size: "16sp"  # Adjust font size as needed
+                            size_hint_y: None
+                            height: self.texture_size[1]
+                            font_name: "Fontspring-DEMO-sonnygothic-regular.otf"
+                            line_height: 0.75
+                            halign: 'justify'
+
+                        BoxLayout:
+                            orientation: 'horizontal'
+                            size_hint_x: 1.00
+                            height: dp(10)
+
+                            MDTextField:
+                                id: confirmpassword
+                                mode: "round"
+                                font_size: "12dp"
+                                text_color_normal: 0.6, 0.6, 0.6, 1  # Set the text color to black
+                                text_color_focus: 1, 1, 1, 1
+                                line_color_normal: 0.6, 0.6, 0.6, 1  # Set the line color to black
+                                line_color_focus: 0, 0, 0, 1
+                                pos_hint: {'center_x': .5, 'center_y': .65}
+                                on_text: self.text = self.text.replace(" ", "")
+                                password: True
+
+                            MDIconButton:
+                                icon: 'eye-off'
+                                theme_text_color: "Custom"
+                                text_color: 0, 0, 0, 1
+                                pos_hint:{'center_y': 0.7 }
+                                on_release: root.toggle_password_visibility(confirmpassword, self)
+                                size_hint: (0.15, 1)
+                                size: dp(16), dp(16)
+
+
+                        Widget:
+                            size_hint_y: None
+                            height: dp(7)  # Adjust the space between the button and the label
+
+                        MDFlatButton:
+                            text: "Update Password"
+                            font_size: 21
+                            theme_text_color: "Custom"
+                            text_color: 1, 1, 1, 1  # Match the text color of the MDLabel
+                            font_name: "Fontspring-DEMO-sonnygothic-regular.otf"
+                            md_bg_color: 0.6, 0.6, 0.6, 1  # Match the background color of the MDTextField
+                            pos_hint: {'center_x': .5, 'center_y': .55}
+                            on_press: root.update_password()
+
+                        Widget:
+                            size_hint_y: None
+                            height: dp(16)  # Adjust the space between the button and the label
+
+                    Widget:
+                        size_hint_y: None
+                        height: dp(7)  # Adjust the space between the button and the label
+
+
+
+                BoxLayout:
+                    canvas.before:
+                        Color:
+                            rgba: 1, 1, 1, 1  # Set the color (gray in this example)
+                        Rectangle:
+                            size: self.size  # Set the size to match the BoxLayout size
+                            pos: self.pos
+                        Color:
+                            rgba: 0.843, 0.843, 0.843, 1
+                        Line:
+                            points: self.x, self.y + dp(50), self.right, self.y + dp(50)
+                            width: dp(0.2)
+                    size_hint_y: None
+                    orientation: 'vertical'
+                    height: dp(520)
+                    padding: dp(16)
+                    spacing: dp(16) # Remove spacing between layouts
+
+                    Image:
+                        source:"bytecodelogo2.png"  # Specify the path to your image file
+                        size_hint:(None,None)  # Disable size hint to set a fixed size
+                        size:(230, 230)  # Set the width and height of the image in pixels
+                        pos_hint:{'center_x': 0.485}  # Center the image horizontally and place it towards the bottom
+                        # You can alternatively use 'pos' attribute to set the position directly.
+
+                    MDLabel:
+                        text: "India | Head office - kochi | Chennai"
+                        theme_text_color: "Custom"
+                        text_color: 0.3, 0.3, 0.3, 1
+                        size_hint_y: None
+                        height: self.texture_size[1]
+                        pos_hint:{'center_x': 0.635}
+                        font_name:"AcehSoft-Regular.ttf"
+                        font_size: "15.5sp"
+                        size_hint_x: None  # Disable relative width sizing
+                        width: dp(320)  # Set the fixed width of the label in density-independent pixels
+
+                    MDLabel:
+                        text: "Europe/UK/Middle East"
+                        theme_text_color: "Custom"
+                        text_color: 0.3, 0.3, 0.3, 1
+                        size_hint_y: None
+                        height: self.texture_size[1]
+                        pos_hint:{'center_x': 0.72}
+                        font_name:"AcehSoft-Regular.ttf"
+                        font_size: "15.5sp"
+                        size_hint_x: None  # Disable relative width sizing
+                        width: dp(320)  # Set the fixed width of the label in density-independent pixels
+                    MDLabel:
+                        text: "bytecodecrafters@gmail.com\n"
+                        theme_text_color: "Custom"
+                        text_color: 0.3, 0.3, 0.3, 1
+                        size_hint_y: None
+                        height: self.texture_size[1]
+                        pos_hint:{'center_x': 0.68}
+                        font_name:"AcehSoft-Regular.ttf"
+                        font_size: "15.5sp"
+                        size_hint_x: None  # Disable relative width sizing
+                        width: dp(320)  # Set the fixed width of the label in density-independent pixels
+                    Widget:
+                        size_hint_y: None
+                        height: dp(25)  # Adjust the space between the button and the label
+                    BoxLayout:
+                        size_hint_y: None
+                        orientation: 'horizontal'
+                        height: dp(50)
+                        padding: dp(16)
+                        spacing: dp(25)
+                        pos_hint: {'center_x': 0.75, 'center_y': 0.5}
+
+                        MDIconButton:
+                            icon: "instagram"
+                            theme_text_color: "Custom"
+                            text_color: 0.3, 0.3, 0.3, 1
+                            size_hint: None, None
+                            size: dp(0.1), dp(0.1)
+                            on_release: app.open_url5()  # Update the on_release function as needed
+
+                        MDIconButton:
+                            icon: "whatsapp"
+                            theme_text_color: "Custom"
+                            text_color: 0.3, 0.3, 0.3, 1
+                            size_hint: None, None
+                            size: dp(0.1), dp(0.1)
+                            on_release: app.open_url4()  # Update the on_release function as needed
+
+
+                    MDLabel:
+                        text: "\n"
+                        theme_text_color: "Custom"
+                        text_color: 0.5, 0.5, 0.5, 1
+                        size_hint_y: None
+                        height: self.texture_size[1]
+                        pos_hint:{'center_x': 0.61}
+                        font_name:"AcehSoft-Regular.ttf"
+                        font_size: "15.5sp"
+                        size_hint_x: None  # Disable relative width sizing
+                        width: dp(320)  # Set the fixed width of the label in density-independent pixels
+
+                    MDLabel:
+                        text: "Copyright © 2024 ByteCode Crafters | Powered by ByteCode Crafters"
+                        theme_text_color: "Custom"
+                        text_color: 0.4, 0.4, 0.4, 1
+                        size_hint_y: None
+                        height: self.texture_size[1]
+                        pos_hint:{'center_x': 0.5 }
+                        font_name:"Aceh-Light.ttf"
+                        font_size: "11sp"
+                        size_hint_x: None  # Disable relative width sizing
+                        width: dp(320)  # Set the fixed width of the label in density-independent pixels
+
+
+<DeleteAccountPage>:
+    name: "delete account"
+    BoxLayout:
+        orientation: 'vertical'
+
+        MDTopAppBar:
+            title: "BYTECODE CRAFTERS"
+            elevation: 1
+            left_action_items: [['menu', lambda x: root.dropmenu(x)]]
+            right_action_items: [['account', lambda x: root.drpmenu(x)]]
+
+        ScrollView:
+            pos_hint: {'center_x': 0.5}  # Center the ScrollView horizontally
+            MDGridLayout:
+                cols: 1
+                adaptive_height: True
+                spacing: 0  # Remove spacing between layouts
+                padding: dp(0), dp(0), dp(0), dp(0)  # Set padding to 0 on all sides
+
+
+
+                BoxLayout:
+                    orientation: 'vertical'
+                    padding: dp(10)
+                    size_hint_y: None
+                    height: dp(412)
+
+                    canvas.before:
+                        Color:
+                            rgba: 243/255, 240/255, 229/255, 1  # Background color #F3F0E5
+                        Rectangle:
+                            size: self.size
+                            pos: self.pos
+                    Widget:
+                        size_hint_y: None
+                        height: dp(7)  # Adjust the space between the button and the label
+
+                    BoxLayout:
+                        orientation: 'vertical'
+                        size_hint_y: None
+                        height: dp(380)
+
+                        canvas.before:
+                            Color:
+                                rgba: 1, 1, 1, 1  # White background
+                            Rectangle:
+                                size: self.size
+                                pos: self.pos
+
+                        padding: dp(16)
+                        spacing: dp(16)
+
+                        MDBoxLayout:
+                            orientation: 'horizontal'
+                            size_hint_y: None
+                            height: dp(30)  # Adjust the height as needed
+                            spacing:dp(7)
+
+                            MDIcon:
+                                icon: 'delete'
+
+                                size: dp(24), dp(24)  # Adjust the size of the icon as needed
+                                theme_text_color: "Custom"
+                                text_color: 85/255, 85/255, 85/255, 1  # Set the icon color to black
+                                pos_hint: {'center_y': 0.75}
+
+                            MDLabel:
+                                text: '[b]Delete Account[/b]'
+                                markup: True
+                                theme_text_color: "Custom"
+                                text_color: 85/255, 85/255, 85/255, 1  # Set the text color to black
+                                font_size: "18sp"  # Adjust font size as needed
+                                size_hint_y: None
+                                height: self.texture_size[1]
+                                font_name: "Fontspring-DEMO-sonnygothic-regular.otf"
+                                line_height: 0.75
+                                halign: 'justify'
+
+
+                        MDLabel:
+                            text: 'Are you sure you want to delete your account? This will erase all of your account data from the site. To delete your account enter your password below.'
+                            markup: True
+                            theme_text_color: "Custom"
+                            text_color: 85/255, 85/255, 85/255, 1
+                            font_size: "16sp"  # Adjust font size as needed
+                            size_hint_y: None
+                            height: self.texture_size[1]
+                            font_name: "Fontspring-DEMO-sonnygothic-book.otf"
+                            line_height: 0.75
+                            halign: 'justify'
+
+                        MDLabel:
+                            text: '[b]Password[/b]'
+                            markup: True
+                            theme_text_color: "Custom"
+                            text_color: 85/255, 85/255, 85/255, 1
+                            font_size: "16sp"  # Adjust font size as needed
+                            size_hint_y: None
+                            height: self.texture_size[1]
+                            font_name: "Fontspring-DEMO-sonnygothic-regular.otf"
+                            line_height: 0.75
+                            halign: 'justify'
+                        BoxLayout:
+                            orientation: 'horizontal'
+                            size_hint_x: 1.00
+                            height: dp(10)
+
+                            MDTextField:
+                                id: deletepassword
+                                mode: "round"
+                                font_size: "12dp"
+                                text_color_normal: 0.6, 0.6, 0.6, 1  # Set the text color to black
+                                text_color_focus: 1, 1, 1, 1
+                                line_color_normal: 0.6, 0.6, 0.6, 1  # Set the line color to black
+                                line_color_focus: 0, 0, 0, 1
+                                pos_hint: {'center_x': .5, 'center_y': .65}
+                                on_text: self.text = self.text.replace(" ", "")
+                                password: True
+
+                            MDIconButton:
+                                icon: 'eye-off'
+                                theme_text_color: "Custom"
+                                text_color: 0, 0, 0, 1
+                                pos_hint:{'center_y': 0.7 }
+                                on_release: root.toggle_password_visibility(deletepassword, self)
+                                size_hint: (0.15, 1)
+                                size: dp(16), dp(16)
+
+
+
+
+
+                        Widget:
+                            size_hint_y: None
+                            height: dp(7)  # Adjust the space between the button and the label
+                        MDFlatButton:
+                            text: "Delete Account"
+                            font_size: 21
+                            theme_text_color: "Custom"
+                            text_color: 1, 1, 1, 1  # Match the text color of the MDLabel
+                            font_name: "Fontspring-DEMO-sonnygothic-regular.otf"
+                            md_bg_color: 0.6, 0.6, 0.6, 1  # Match the background color of the MDTextField
+                            pos_hint: {'center_x': .5, 'center_y': .55}
+                            on_press: root.delete_account()
+
+                        Widget:
+                            size_hint_y: None
+                            height: dp(16)  # Adjust the space between the button and the label
+
+
+                    Widget:
+                        size_hint_y: None
+                        height: dp(7)  # Adjust the space between the button and the label
+
+
+                BoxLayout:
+                    canvas.before:
+                        Color:
+                            rgba: 1, 1, 1, 1  # Set the color (gray in this example)
+                        Rectangle:
+                            size: self.size  # Set the size to match the BoxLayout size
+                            pos: self.pos
+                        Color:
+                            rgba: 0.843, 0.843, 0.843, 1
+                        Line:
+                            points: self.x, self.y + dp(50), self.right, self.y + dp(50)
+                            width: dp(0.2)
+                    size_hint_y: None
+                    orientation: 'vertical'
+                    height: dp(520)
+                    padding: dp(16)
+                    spacing: dp(16) # Remove spacing between layouts
+
+                    Image:
+                        source:"bytecodelogo2.png"  # Specify the path to your image file
+                        size_hint:(None,None)  # Disable size hint to set a fixed size
+                        size:(230, 230)  # Set the width and height of the image in pixels
+                        pos_hint:{'center_x': 0.485}  # Center the image horizontally and place it towards the bottom
+                        # You can alternatively use 'pos' attribute to set the position directly.
+
+                    MDLabel:
+                        text: "India | Head office - kochi | Chennai"
+                        theme_text_color: "Custom"
+                        text_color: 0.3, 0.3, 0.3, 1
+                        size_hint_y: None
+                        height: self.texture_size[1]
+                        pos_hint:{'center_x': 0.635}
+                        font_name:"AcehSoft-Regular.ttf"
+                        font_size: "15.5sp"
+                        size_hint_x: None  # Disable relative width sizing
+                        width: dp(320)  # Set the fixed width of the label in density-independent pixels
+
+                    MDLabel:
+                        text: "Europe/UK/Middle East"
+                        theme_text_color: "Custom"
+                        text_color: 0.3, 0.3, 0.3, 1
+                        size_hint_y: None
+                        height: self.texture_size[1]
+                        pos_hint:{'center_x': 0.72}
+                        font_name:"AcehSoft-Regular.ttf"
+                        font_size: "15.5sp"
+                        size_hint_x: None  # Disable relative width sizing
+                        width: dp(320)  # Set the fixed width of the label in density-independent pixels
+                    MDLabel:
+                        text: "bytecodecrafters@gmail.com\n"
+                        theme_text_color: "Custom"
+                        text_color: 0.3, 0.3, 0.3, 1
+                        size_hint_y: None
+                        height: self.texture_size[1]
+                        pos_hint:{'center_x': 0.68}
+                        font_name:"AcehSoft-Regular.ttf"
+                        font_size: "15.5sp"
+                        size_hint_x: None  # Disable relative width sizing
+                        width: dp(320)  # Set the fixed width of the label in density-independent pixels
+                    Widget:
+                        size_hint_y: None
+                        height: dp(25)  # Adjust the space between the button and the label
+                    BoxLayout:
+                        size_hint_y: None
+                        orientation: 'horizontal'
+                        height: dp(50)
+                        padding: dp(16)
+                        spacing: dp(25)
+                        pos_hint: {'center_x': 0.75, 'center_y': 0.5}
+
+                        MDIconButton:
+                            icon: "instagram"
+                            theme_text_color: "Custom"
+                            text_color: 0.3, 0.3, 0.3, 1
+                            size_hint: None, None
+                            size: dp(0.1), dp(0.1)
+                            on_release: app.open_url5()  # Update the on_release function as needed
+
+                        MDIconButton:
+                            icon: "whatsapp"
+                            theme_text_color: "Custom"
+                            text_color: 0.3, 0.3, 0.3, 1
+                            size_hint: None, None
+                            size: dp(0.1), dp(0.1)
+                            on_release: app.open_url4()  # Update the on_release function as needed
+
+
+                    MDLabel:
+                        text: "\n"
+                        theme_text_color: "Custom"
+                        text_color: 0.5, 0.5, 0.5, 1
+                        size_hint_y: None
+                        height: self.texture_size[1]
+                        pos_hint:{'center_x': 0.61}
+                        font_name:"AcehSoft-Regular.ttf"
+                        font_size: "15.5sp"
+                        size_hint_x: None  # Disable relative width sizing
+                        width: dp(320)  # Set the fixed width of the label in density-independent pixels
+
+                    MDLabel:
+                        text: "Copyright © 2024 ByteCode Crafters | Powered by ByteCode Crafters"
+                        theme_text_color: "Custom"
+                        text_color: 0.4, 0.4, 0.4, 1
+                        size_hint_y: None
+                        height: self.texture_size[1]
+                        pos_hint:{'center_x': 0.5 }
+                        font_name:"Aceh-Light.ttf"
+                        font_size: "11sp"
+                        size_hint_x: None  # Disable relative width sizing
+                        width: dp(320)  # Set the fixed width of the label in density-independent pixels
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
